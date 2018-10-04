@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Gallery News</title>
+    <!-- Lato Font -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/gallery-materialize.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/responsive-tabs.css') }}" />
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <a href="javascript:" id="return-to-top"><i class="large material-icons">arrow_drop_up</i></a>
+    <!-- Navbar and Header -->
+    <nav class="nav-extended nav-full-header-custom teal lighten-5">
+      <div class="nav-wrapper teal">
+        <div class="container">
+            <a href="/" class="brand-logo"><i class="material-icons">camera</i>Gallery News</a>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="/">Beranda</a></li>
+              <li><a href="/data">Data</a></li>
+            </ul>
+        </div>
+      </div>
+      <div class="nav-header valign-wrapper">
+          <div id="chartdiv" class="container"></div><br>
+          <div class="container">
+              <h6 class="coll-name">Sumber</h6>
+              <div class="row">
+                  <div class="col s3 chip  orange lighten-3 coll-name">
+                        Liputan 6 : {{ len_liputan }} Articles
+                  </div>
+                  <div class="col s3 chip  purple lighten-4 coll-name">
+                        Kompas : {{ len_kompas }} Articles
+                  </div>
+                  <div class="col s3 chip  red lighten-3 coll-name">
+                        Tempo : {{ len_tempo }} Articles
+                  </div>
+              </div>
+          </div>
+      </div>
+    </nav>
+    <ul class="side-nav" id="nav-mobile">
+      <li><a href="/"><i class="material-icons">camera</i>Gallery News</a></li>
+      <li><a href="/data"><i class="material-icons">insert_drive_file</i>Data</a></li>
+    </ul>
+
+    <form  action = "http://localhost:5000/findata" method = "POST">
+        <div class="container"><br>
+          <h4>Search News</h4>
+              <div class="row">
+                <div class="col s12">
+                  <div class="row">
+                    <div class="input-field col s1">
+                        <h6>Keyword Search</h6>
+                    </div>
+                    <div class="input-field col s10">
+                      <i class="material-icons prefix">library_books</i>
+                      <input id="keyword" type="text" class="validate" name="keyword">
+                      <label for="keyword">ex : Samsul Bahri, Paijo</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col s12">
+                      <div class="row">
+                          <div class="input-field col s1">
+                              Kategori
+                          </div>
+                          <div class="input-field col s3">
+                              <select class="icons" name="select_kategori">
+                                  <option value="" selected>Pilih Kategori</option>
+                                  <option name="semua_kategori" value="semua_kategori" data-icon="{{ url_for('static', filename='image/all.png') }}" class="right">Semua Kategori</option>
+                                  <option name="news" value="news" data-icon="{{ url_for('static', filename='image/newspaper.png') }}" class="right">News</option>
+                                  <option name="business" value="business" data-icon="{{ url_for('static', filename='image/business.png') }}" class="right">Business</option>
+                                  <option name="sports" value="sports" data-icon="{{ url_for('static', filename='image/sports.png') }}" class="right">Sports</option>
+                                  <option name="entertainment" value="entertainment" data-icon="{{ url_for('static', filename='image/entertainment.png') }}" class="right">Entertainment</option>
+                                  <option name="technology" value="technology" data-icon="{{ url_for('static', filename='image/technology.png') }}" class="right">Technology</option>
+                                  <option name="automotive" value="automotive" data-icon="{{ url_for('static', filename='image/automotive.png') }}" class="right">Automotive</option>
+                              </select>
+{#                              <label for="kategori">Images in select</label>#}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col s12">
+                      <div class="row">
+                          <div class="input-field col s1">
+                              Sumber
+                          </div>
+                          <div class="input-field col s3">
+                              <select class="icons" name="select_sumber">
+                                  <option value="" selected>Pilih Sumber</option>
+                                  <option name="semua_sumber" value="semua_sumber" data-icon="{{ url_for('static', filename='image/all.png') }}" class="right">Semua Sumber</option>
+                                  <option value="kompas" data-icon="{{ url_for('static', filename='image/kompas.jpg') }}" class="right">Kompas</option>
+                                  <option value="liputan" data-icon="https://cdn1-production-assets-kly.akamaized.net/logos/188/original/044045000_1535940581-057215000_1530504005-088099700_1500456552-049186300_1499071482-Logo_Desktop_Liputan6.png" class="right">Liputan 6</option>
+                                  <option value="tempo" data-icon="https://www.tempo.co/images/logo-tempo-co.png" class="right">Tempo</option>
+                              </select>
+{#                              <label for="kategori">Images in select</label>#}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col s12">
+                  <div class="row">
+                    <div class="input-field col s1">
+                        <h6>Date</h6>
+                    </div>
+                    <div class="input-field col s5">
+                      <i class="material-icons prefix">date_range</i>
+                      <input id="start_date" name="start_date" type="date" class="validate datepicker-start">
+                      <label for="start_date">Start Date</label>
+                    </div>
+                    <div class="input-field col s5">
+                      <i class="material-icons prefix">date_range</i>
+                      <input id="end_date" name="end_date" type="date" class="validate datepicker-end">
+                      <label for="end_date">End Date</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                  <button class="btn waves-effect waves-light" type="submit" value="submit" name="submit">Search
+                    <i class="material-icons right">send</i>
+                  </button>
+              </div>
+        </div>
+     </form>
+
+
+    <footer class="page-footer teal">
+      <div class="footer-copyright">
+        <div class="container">
+            <p class="center">© 2018 Copyright Tri Purnomo Aji</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Core Javascript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/materialize/0.98.0/js/materialize.min.js"></script>
+    <script src="{{ url_for('static', filename='js/color-thief.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/galleryExpand.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/init.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/materialize-pagination.js') }}"></script>
+
+    <!-- Resources AmChart 4-->
+    <script src="//www.amcharts.com/lib/4/core.js"></script>
+    <script src="//www.amcharts.com/lib/4/charts.js"></script>
+    <script src="//www.amcharts.com/lib/4/themes/animated.js"></script>
+
+    <script>
+        am4core.useTheme(am4themes_animated);
+        var chart = am4core.create("chartdiv", am4charts.PieChart);
+        chart.data = [
+          {
+            category: "News",
+            value: {{ len_news }}
+          },
+          {
+            category: "Business",
+            value: {{ len_bisnis }}
+          },
+          {
+            category: "Sports",
+            value: {{ len_sports }}
+          },
+          {
+            category: "Entertainment",
+            value: {{ len_entertainment }}
+          },
+          {
+            category: "Technology",
+            value: {{ len_tekno }}
+          },
+          {
+            category: "Automotive",
+            value: {{ len_otomotif }}
+          }
+        ];
+        chart.radius = am4core.percent(70);
+        chart.innerRadius = am4core.percent(40);
+        chart.startAngle = 180;
+        chart.endAngle = 360;
+        var series = chart.series.push(new am4charts.PieSeries());
+        series.dataFields.value = "value";
+        series.dataFields.category = "category";
+        series.slices.template.cornerRadius = 10;
+        series.slices.template.innerCornerRadius = 7;
+        series.slices.template.draggable = true;
+        series.slices.template.inert = true;
+        series.hiddenState.properties.startAngle = 90;
+        series.hiddenState.properties.endAngle = 90;
+        chart.legend = new am4charts.Legend();
+    </script>
+
+    <script>
+        // Accept datepicker-start or datepicker-end, as we need to initialize both anyway.
+        $("input[class*='datepicker-']").pickadate({
+          selectMonths: true,
+          selectYears: 100,
+          format: 'dd/mmm/yyyy',    // Canadian date format, eh.
+          onSet: function(obj){
+            let thisPicker = $(this)[0].$node;    // Needed to hack to get the thing I was after.
+
+            // Check if this is the start date
+            let classes = thisPicker.attr("class");
+            if (classes === undefined || classes.length === 0 || classes.indexOf("datepicker-start") < 0){
+              return;
+            }
+
+            // .datepicker-start must be wrapped in a div.input-field element (in this example), and
+            // .datepicker-end must be in the next div.input-field.  Change selectors for your conditions.
+            let parent1 = thisPicker.closest("div.input-field");    // This picker's parent
+            let parent2 = parent1.next("div.input-field");          // Next picker's parent
+            let picker2 = parent2.find(".datepicker-end");          // Matching 'end' picker
+
+            // Set end picker minimum date, or whatever you need.
+            if(obj.select){
+              let dt = new Date(obj.select);
+              picker2.pickadate('picker').set('min', dt);
+            }
+
+            if(obj.hasOwnProperty('clear')){
+              picker2.pickadate('picker').set('min', false);
+            }
+          }
+        });
+    </script>
+    <script>
+         $(document).ready(function() {
+            $('select').material_select();
+          });
+    </script>
+  </body>
+</html>

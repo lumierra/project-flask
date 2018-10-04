@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Gallery News</title>
+    <!-- Lato Font -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/gallery-materialize.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/responsive-tabs.css') }}" />
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <a href="javascript:" id="return-to-top"><i class="large material-icons">arrow_drop_up</i></a>
+    <!-- Navbar and Header -->
+    <nav class="nav-extended nav-full-header-custom teal lighten-5">
+      <div class="nav-wrapper teal">
+        <div class="container">
+            <a href="/" class="brand-logo"><i class="material-icons">camera</i>Gallery News</a>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="/">Beranda</a></li>
+              <li><a href="/data">Data</a></li>
+            </ul>
+        </div>
+      </div>
+      <div class="nav-header valign-wrapper">
+          <div id="chartdiv" class="container"></div><br>
+          <div class="container">
+              <h6 class="coll-name">Sumber</h6>
+              <div class="row">
+                  <div class="col s3 chip  teal lighten-3 coll-name">
+                        Liputan 6 : {{ len_liputan }} Articles
+                  </div>
+                  <div class="col s3 chip  teal lighten-3 coll-name">
+                        Kompas : {{ len_kompas }} Articles
+                  </div>
+                  <div class="col s3 chip teal lighten-3 coll-name">
+                        Tempo : {{ len_tempo }} Articles
+                  </div>
+              </div>
+          </div>
+      </div>
+    </nav>
+    <ul class="side-nav" id="nav-mobile">
+      <li><a href="/"><i class="material-icons">camera</i>Gallery News</a></li>
+      <li><a href="/data"><i class="material-icons">insert_drive_file</i>Data</a></li>
+    </ul>
+
+    <form  action = "http://localhost:5000/findata" method = "POST">
+        <div class="container"><br>
+          <h4>Search News</h4>
+              <div class="row">
+                <div class="col s12">
+                  <div class="row">
+                    <div class="input-field col s8">
+                      <i class="material-icons prefix">library_books</i>
+                      <input id="keyword" type="text" class="validate" name="keyword">
+                      <label for="keyword">Keyword (ex : Samsul Bahri, Paijo)</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col s12">
+                      <div class="row">
+                          <div class="input-field col s1">
+                              Kategori
+                          </div>
+                          <div class="input-field col s3">
+                              <select class="icons" name="select_kategori">
+                                  <option value="" selected>Pilih Kategori</option>
+                                  <option name="semua_kategori" value="semua_kategori" data-icon="{{ url_for('static', filename='image/all.png') }}" class="right">Semua Kategori</option>
+                                  <option value="news" data-icon="{{ url_for('static', filename='image/newspaper.png') }}" class="right">News</option>
+                                  <option value="business" data-icon="{{ url_for('static', filename='image/business.png') }}" class="right">Business</option>
+                                  <option value="sports" data-icon="{{ url_for('static', filename='image/sports.png') }}" class="right">Sports</option>
+                                  <option value="entertainment" data-icon="{{ url_for('static', filename='image/entertainment.png') }}" class="right">Entertainment</option>
+                                  <option value="technology" data-icon="{{ url_for('static', filename='image/technology.png') }}" class="right">Technology</option>
+                                  <option value="automotive" data-icon="{{ url_for('static', filename='image/automotive.png') }}" class="right">Automotive</option>
+                              </select>
+{#                              <label for="kategori">Images in select</label>#}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col s12">
+                      <div class="row">
+                          <div class="input-field col s1">
+                              Sumber
+                          </div>
+                          <div class="input-field col s3">
+                              <select class="icons" name="select_sumber">
+                                  <option value="" selected>Pilih Sumber</option>
+                                  <option name="semua_sumber" value="semua_sumber" data-icon="{{ url_for('static', filename='image/all.png') }}" class="right">Semua Sumber</option>
+                                  <option value="kompas" data-icon="{{ url_for('static', filename='image/kompas.jpg') }}" class="right">Kompas</option>
+                                  <option value="liputan" data-icon="https://cdn1-production-assets-kly.akamaized.net/logos/188/original/044045000_1535940581-057215000_1530504005-088099700_1500456552-049186300_1499071482-Logo_Desktop_Liputan6.png" class="right">Liputan 6</option>
+                                  <option value="tempo" data-icon="https://www.tempo.co/images/logo-tempo-co.png" class="right">Tempo</option>
+                              </select>
+{#                              <label for="kategori">Images in select</label>#}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col s12">
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <i class="material-icons prefix">date_range</i>
+                      <input id="start_date" name="start_date" type="date" class="validate datepicker-start">
+                      <label for="start_date">Start Date</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <i class="material-icons prefix">date_range</i>
+                      <input id="end_date" name="end_date" type="date" class="validate datepicker-end">
+                      <label for="end_date">End Date</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                  <button class="btn waves-effect waves-light" type="submit" value="submit" name="submit">Search
+                    <i class="material-icons right">send</i>
+                  </button>
+              </div>
+        </div>
+     </form><br>
+    <nav>
+        <!-- Fixed Masonry Filters -->
+      <div class="categories-wrapper teal lighten-2">
+        <div class="categories-container">
+            <ul class="categories container">
+                <li class="active"><a href="#all" class="font-categories">All <span class="new badge teal">{% print(len_data) %}</span></a></li>
+                <li><a href="#news" class="font-categories">News <span class="new badge teal">{% print(len_news) %}</span></a></li>
+                <li><a href="#bisnis" class="font-categories">Business <span class="new badge teal">{% print(len_bisnis) %}</span></a></li>
+                <li><a href="#sports" class="font-categories">Sports <span class="new badge teal">{% print(len_sports) %}</span></a></li>
+                <li><a href="#entertainment" class="font-categories">Entertainment <span class="new badge teal">{% print(len_entertainment) %}</span></a></li>
+                <li><a href="#tekno" class="font-categories">Technology <span class="new badge teal">{% print(len_tekno) %}</span></a></li>
+                <li><a href="#otomotif" class="font-categories">Automotive <span class="new badge teal">{% print(len_otomotif) %}</span></a></li>
+            </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Gallery -->
+    <div id="portfolio" class="section gray">
+      <div class="container">
+        <div class="gallery row">
+           {% for i in range(data | length) %}
+               {% if len_data == 0 %}
+                    <div>
+                        News Not Found !!
+                    </div>
+               {% else %}
+                   {% if data[i]['category'] == 'news' %}
+                       <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter sacred news">
+                            <div class="gallery-curve-wrapper">
+                              <a class="gallery-cover gray">
+                                <img class="responsive-img" src="{{ data[i]['img'] }}" alt="placeholder">
+                              </a>
+                              <div class="gallery-header">
+                                  <div class="chip news size-category news_category">News</div><br>
+                                  <span>{{ data[i]['title'] }}</span>
+                              </div>
+                              <div class="gallery-body">
+                                  <div class="title-wrapper"><h5>{{ data[i]['title'] }}</h5></div>
+                                  <div class="chip news size-category news_category">News</div>
+                                  <div class="chip news size-category news_category">
+                                    <a class="link" href="{{ 'https://'+data[i]['source'] }}" target="_blank">
+                                        <img class="verfied" src="{{ url_for('static', filename='image/check.png') }}">
+                                        {{ data[i]['source'] }}
+                                    </a>
+                                  </div>
+                                  <div class="chip date-news">{{ data[i]['publishedAt'] }}</div><br><br>
+                                  <ul class="tabs tabs-fixed-width tab-demo z-depth-1">
+                                        <li class="tab"><a class="active" href="#{{ data[i]['_id'] }}">Article Content</a></li>
+                                        <li class="tab"><a href="#{{ i }}">NER Article Content</a></li>
+                                      </ul>
+                                      <div id="{{ data[i]['_id'] }}" class="col s12 description1">
+                                          <p>
+                                              {% for content in data[i]['content_html'] %}
+                                                    {{ content }}<br><br>
+                                              {% endfor %}
+                                          </p>
+                                      </div>
+                                      <div id="{{ i }}" class="col s12">
+                                          <p>
+                                              <div class="row">
+                                                <div class="col s3 left-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-person{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-person{{ data[i]['_id'] }}', '.PERSON-{{ data[i]['_id'] }}', '#ef9a9a')">
+                                                          <span class="lever"></span>PERSON
+                                                          <div class="chip red lighten-1 font-label">{{ data[i]['count_ner']['person'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s3 center-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-org{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-org{{ data[i]['_id'] }}', '.ORG-{{ data[i]['_id'] }}','#90caf9')">
+                                                          <span class="lever"></span>ORG
+                                                          <div class="chip blue lighten-1 font-label">{{ data[i]['count_ner']['org'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s3 center-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-gpe{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-gpe{{ data[i]['_id'] }}', '.GPE-{{ data[i]['_id'] }}', '#a5d6a7')">
+                                                          <span class="lever"></span>GPE
+                                                          <div class="chip green lighten-3 font-label">{{ data[i]['count_ner']['gpe'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s3 right-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-merk{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-merk{{ data[i]['_id'] }}', '.MERK-{{ data[i]['_id'] }}', '#9fa8da')">
+                                                          <span class="lever"></span>MERK
+                                                          <div class="chip indigo lighten-3 font-label">{{ data[i]['count_ner']['merk'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col s6 center-align">
+                                                      <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-event{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-event{{ data[i]['_id'] }}', '.EVENT-{{ data[i]['_id'] }}', '#6a1b9a')">
+                                                          <span class="lever"></span>EVENT
+                                                          <div class="chip purple lighten-3 font-label">{{ data[i]['count_ner']['event'] }}</div>
+                                                        </label>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col s6 center-align">
+                                                      <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-product{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-product{{ data[i]['_id'] }}', '.PRODUCT-{{ data[i]['_id'] }}', '#ffab91')">
+                                                          <span class="lever"></span>PRODUCT
+                                                          <div class="chip deep-orange lighten-3 font-label">{{ data[i]['count_ner']['product'] }}</div>
+                                                        </label>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                             {% for content in data[i]['ner_content'] %}
+                                                {{ content|safe }}<br><br>
+                                             {% endfor %}
+                                          </p>
+                                      </div>
+                                  <div class="chip">
+                                    <h6>Sumber Artikel :<a class="date-news" href="{{ data[i]['url'] }}" target="_blank"> Link </a></h6>
+                                  </div>
+
+                                <div class="carousel-wrapper">
+                                  <div class="carousel">
+                                    <a class="carousel-item" href="#one!"><img src="http://placehold.it/300x200"></a>
+                                    <a class="carousel-item" href="#two!"><img src="http://placehold.it/300x200"></a>
+                                    <a class="carousel-item" href="#three!"><img src="http://placehold.it/300x200"></a>
+                                    <a class="carousel-item" href="#four!"><img src="http://placehold.it/300x200"></a>
+                                    <a class="carousel-item" href="#five!"><img src="http://placehold.it/300x200"></a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="gallery-action">
+                                <a class="btn-floating btn-large waves-effect waves-light pink lighten-1"><i class="material-icons">favorite</i></a>
+                              </div>
+                            </div>
+                          </div>
+                       {% elif data[i]['category'] == 'bisnis' %}
+                            <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter sacred bisnis">
+                                <div class="gallery-curve-wrapper">
+                                  <a class="gallery-cover gray">
+                                    <img class="responsive-img" src="{{ data[i]['img'] }}" alt="placeholder">
+                                  </a>
+                                  <div class="gallery-header">
+                                      <div class="chip news size-category bisnis_category">Business</div><br>
+                                      <span>{{ data[i]['title'] }}</span>
+                                  </div>
+                                  <div class="gallery-body">
+                                      <div class="title-wrapper"><h5>{{ data[i]['title'] }}</h5></div>
+                                      <div class="chip news size-category bisnis_category">Business</div>
+                                      <div class="chip news size-category bisnis_category">
+                                        <a class="link" href="{{ 'https://'+data[i]['source'] }}" target="_blank">{{ data[i]['source'] }}
+                                            <img class="verfied" src="{{ url_for('static', filename='image/check.png') }}">
+                                        </a>
+                                      </div>
+                                      <div class="chip date-bisnis">{{ data[i]['publishedAt'] }}</div><br><br>
+                                      <ul class="tabs tabs-fixed-width tab-demo z-depth-1">
+                                        <li class="tab"><a class="active" href="#{{ data[i]['_id'] }}">Article Content</a></li>
+                                        <li class="tab"><a href="#{{ i }}">NER Article Content</a></li>
+                                      </ul>
+                                      <div id="{{ data[i]['_id'] }}" class="col s12 description1">
+                                          <p>
+                                              {% for content in data[i]['content_html'] %}
+                                                    {{ content }}<br><br>
+                                              {% endfor %}
+                                          </p>
+                                      </div>
+                                      <div id="{{ i }}" class="col s12">
+                                          <p>
+                                              <div class="row">
+                                                <div class="col s3 left-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-person{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-person{{ data[i]['_id'] }}', '.PERSON-{{ data[i]['_id'] }}', '#ef9a9a')">
+                                                          <span class="lever"></span>PERSON
+                                                          <div class="chip red lighten-1 font-label">{{ data[i]['count_ner']['person'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s3 center-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-org{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-org{{ data[i]['_id'] }}', '.ORG-{{ data[i]['_id'] }}','#90caf9')">
+                                                          <span class="lever"></span>ORG
+                                                          <div class="chip blue lighten-1 font-label">{{ data[i]['count_ner']['org'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s3 center-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-gpe{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-gpe{{ data[i]['_id'] }}', '.GPE-{{ data[i]['_id'] }}', '#a5d6a7')">
+                                                          <span class="lever"></span>GPE
+                                                          <div class="chip green lighten-3 font-label">{{ data[i]['count_ner']['gpe'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s3 right-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-merk{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-merk{{ data[i]['_id'] }}', '.MERK-{{ data[i]['_id'] }}', '#9fa8da')">
+                                                          <span class="lever"></span>MERK
+                                                          <div class="chip indigo lighten-3 font-label">{{ data[i]['count_ner']['merk'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col s6 center-align">
+                                                      <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-event{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-event{{ data[i]['_id'] }}', '.EVENT-{{ data[i]['_id'] }}', '#6a1b9a')">
+                                                          <span class="lever"></span>EVENT
+                                                          <div class="chip purple lighten-3 font-label">{{ data[i]['count_ner']['event'] }}</div>
+                                                        </label>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col s6 center-align">
+                                                      <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-product{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-product{{ data[i]['_id'] }}', '.PRODUCT-{{ data[i]['_id'] }}', '#ffab91')">
+                                                          <span class="lever"></span>PRODUCT
+                                                          <div class="chip deep-orange lighten-3 font-label">{{ data[i]['count_ner']['product'] }}</div>
+                                                        </label>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                             {% for content in data[i]['ner_content'] %}
+                                                {{ content|safe }}<br><br>
+                                             {% endfor %}
+                                          </p>
+                                      </div>
+                                      <div class="chip">
+                                          <h6>Sumber Artikel :<a class="date-bisnis" href="{{ data[i]['url'] }}" target="_blank"> Link </a></h6>
+                                      </div>
+                                    <div class="carousel-wrapper">
+                                      <div class="carousel">
+                                        <a class="carousel-item" href="#one!"><img src="http://placehold.it/300x200"></a>
+                                        <a class="carousel-item" href="#two!"><img src="http://placehold.it/300x200"></a>
+                                        <a class="carousel-item" href="#three!"><img src="http://placehold.it/300x200"></a>
+                                        <a class="carousel-item" href="#four!"><img src="http://placehold.it/300x200"></a>
+                                        <a class="carousel-item" href="#five!"><img src="http://placehold.it/300x200"></a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="gallery-action">
+                                    <a class="btn-floating btn-large waves-effect waves-light pink lighten-1"><i class="material-icons">favorite</i></a>
+                                  </div>
+                                </div>
+                              </div>
+                       {% elif data[i]['category'] == 'sports' %}
+                           <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter sacred sports">
+                                <div class="gallery-curve-wrapper">
+                                  <a class="gallery-cover gray">
+                                    <img class="responsive-img" src="{{ data[i]['img'] }}" alt="placeholder">
+                                  </a>
+                                  <div class="gallery-header">
+                                      <div class="chip news size-category sports_category">Sports</div><br>
+                                      <span>{{ data[i]['title'] }}</span>
+                                  </div>
+                                  <div class="gallery-body">
+                                      <div class="title-wrapper"><h5>{{ data[i]['title'] }}</h5></div>
+                                      <div class="chip news size-category sports_category">Sports</div>
+                                      <div class="chip news size-category sports_category">
+                                        <a class="link" href="{{ 'https://'+data[i]['source'] }}" target="_blank">{{ data[i]['source'] }}
+                                            <img class="verfied" src="{{ url_for('static', filename='image/check.png') }}">
+                                        </a>
+                                      </div>
+                                      <div class="chip date-sports">{{ data[i]['publishedAt'] }}</div><br><br>
+                                      <ul class="tabs tabs-fixed-width tab-demo z-depth-1">
+                                        <li class="tab"><a class="active" href="#{{ data[i]['_id'] }}">Article Content</a></li>
+                                        <li class="tab"><a href="#{{ i }}">NER Article Content</a></li>
+                                      </ul>
+                                      <div id="{{ data[i]['_id'] }}" class="col s12 description1">
+                                          <p>
+                                              {% for content in data[i]['content_html'] %}
+                                                    {{ content }}<br><br>
+                                              {% endfor %}
+                                          </p>
+                                      </div>
+                                      <div id="{{ i }}" class="col s12">
+                                          <p>
+                                              <div class="row">
+                                                <div class="col s3 left-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-person{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-person{{ data[i]['_id'] }}', '.PERSON-{{ data[i]['_id'] }}', '#ef9a9a')">
+                                                          <span class="lever"></span>PERSON
+                                                          <div class="chip red lighten-1 font-label">{{ data[i]['count_ner']['person'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s3 center-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-org{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-org{{ data[i]['_id'] }}', '.ORG-{{ data[i]['_id'] }}','#90caf9')">
+                                                          <span class="lever"></span>ORG
+                                                          <div class="chip blue lighten-1 font-label">{{ data[i]['count_ner']['org'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s3 center-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-gpe{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-gpe{{ data[i]['_id'] }}', '.GPE-{{ data[i]['_id'] }}', '#a5d6a7')">
+                                                          <span class="lever"></span>GPE
+                                                          <div class="chip green lighten-3 font-label">{{ data[i]['count_ner']['gpe'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s3 right-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-merk{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-merk{{ data[i]['_id'] }}', '.MERK-{{ data[i]['_id'] }}', '#9fa8da')">
+                                                          <span class="lever"></span>MERK
+                                                          <div class="chip indigo lighten-3 font-label">{{ data[i]['count_ner']['merk'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col s6 center-align">
+                                                      <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-event{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-event{{ data[i]['_id'] }}', '.EVENT-{{ data[i]['_id'] }}', '#6a1b9a')">
+                                                          <span class="lever"></span>EVENT
+                                                          <div class="chip purple lighten-3 font-label">{{ data[i]['count_ner']['event'] }}</div>
+                                                        </label>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col s6 center-align">
+                                                      <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-product{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-product{{ data[i]['_id'] }}', '.PRODUCT-{{ data[i]['_id'] }}', '#ffab91')">
+                                                          <span class="lever"></span>PRODUCT
+                                                          <div class="chip deep-orange lighten-3 font-label">{{ data[i]['count_ner']['product'] }}</div>
+                                                        </label>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                             {% for content in data[i]['ner_content'] %}
+                                                {{ content|safe }}<br><br>
+                                             {% endfor %}
+                                          </p>
+                                      </div>
+                                      <div class="chip">
+                                          <h6>Sumber Artikel :<a class="date-sports" href="{{ data[i]['url'] }}" target="_blank"> Link </a></h6>
+                                      </div>
+                                    <div class="carousel-wrapper">
+                                      <div class="carousel">
+                                        <a class="carousel-item" href="#one!"><img src="http://placehold.it/300x200"></a>
+                                        <a class="carousel-item" href="#two!"><img src="http://placehold.it/300x200"></a>
+                                        <a class="carousel-item" href="#three!"><img src="http://placehold.it/300x200"></a>
+                                        <a class="carousel-item" href="#four!"><img src="http://placehold.it/300x200"></a>
+                                        <a class="carousel-item" href="#five!"><img src="http://placehold.it/300x200"></a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="gallery-action">
+                                    <a class="btn-floating btn-large waves-effect waves-light pink lighten-1"><i class="material-icons">favorite</i></a>
+                                  </div>
+                                </div>
+                              </div>
+                       {% elif data[i]['category'] == 'entertainment' %}
+                           <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter sacred entertainment">
+                                <div class="gallery-curve-wrapper">
+                                  <a class="gallery-cover gray">
+                                    <img class="responsive-img" src="{{ data[i]['img'] }}" alt="placeholder">
+                                  </a>
+                                  <div class="gallery-header">
+                                      <div class="chip news size-category entertaiment_category">Entertainment</div><br>
+                                      <span>{{ data[i]['title'] }}</span>
+                                  </div>
+                                  <div class="gallery-body">
+                                      <div class="title-wrapper"><h5>{{ data[i]['title'] }}</h5></div>
+                                      <div class="chip news size-category entertaiment_category">Entertainment</div>
+                                      <div class="chip news size-category entertaiment_category">
+                                        <a class="link" href="{{ 'https://'+data[i]['source'] }}" target="_blank">{{ data[i]['source'] }}
+                                            <img class="verfied" src="{{ url_for('static', filename='image/check.png') }}">
+                                        </a>
+                                      </div>
+                                      <div class="chip date-entertainment">{{ data[i]['publishedAt'] }}</div><br><br>
+                                      <ul class="tabs tabs-fixed-width tab-demo z-depth-1">
+                                        <li class="tab"><a class="active" href="#{{ data[i]['_id'] }}">Article Content</a></li>
+                                        <li class="tab"><a href="#{{ i }}">NER Article Content</a></li>
+                                      </ul>
+                                      <div id="{{ data[i]['_id'] }}" class="col s12 description1">
+                                          <p>
+                                              {% for content in data[i]['content_html'] %}
+                                                    {{ content }}<br><br>
+                                              {% endfor %}
+                                          </p>
+                                      </div>
+                                      <div id="{{ i }}" class="col s12">
+                                          <p>
+                                              <div class="row">
+                                                <div class="col s3 left-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-person{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-person{{ data[i]['_id'] }}', '.PERSON-{{ data[i]['_id'] }}', '#ef9a9a')">
+                                                          <span class="lever"></span>PERSON
+                                                          <div class="chip red lighten-1 font-label">{{ data[i]['count_ner']['person'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s3 center-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-org{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-org{{ data[i]['_id'] }}', '.ORG-{{ data[i]['_id'] }}','#90caf9')">
+                                                          <span class="lever"></span>ORG
+                                                          <div class="chip blue lighten-1 font-label">{{ data[i]['count_ner']['org'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s3 center-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-gpe{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-gpe{{ data[i]['_id'] }}', '.GPE-{{ data[i]['_id'] }}', '#a5d6a7')">
+                                                          <span class="lever"></span>GPE
+                                                          <div class="chip green lighten-3 font-label">{{ data[i]['count_ner']['gpe'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s3 right-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-merk{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-merk{{ data[i]['_id'] }}', '.MERK-{{ data[i]['_id'] }}', '#9fa8da')">
+                                                          <span class="lever"></span>MERK
+                                                          <div class="chip indigo lighten-3 font-label">{{ data[i]['count_ner']['merk'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col s6 center-align">
+                                                      <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-event{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-event{{ data[i]['_id'] }}', '.EVENT-{{ data[i]['_id'] }}', '#6a1b9a')">
+                                                          <span class="lever"></span>EVENT
+                                                          <div class="chip purple lighten-3 font-label">{{ data[i]['count_ner']['event'] }}</div>
+                                                        </label>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col s6 center-align">
+                                                      <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-product{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-product{{ data[i]['_id'] }}', '.PRODUCT-{{ data[i]['_id'] }}', '#ffab91')">
+                                                          <span class="lever"></span>PRODUCT
+                                                          <div class="chip deep-orange lighten-3 font-label">{{ data[i]['count_ner']['product'] }}</div>
+                                                        </label>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                             {% for content in data[i]['ner_content'] %}
+                                                {{ content|safe }}<br><br>
+                                             {% endfor %}
+                                          </p>
+                                      </div>
+                                      <div class="chip">
+                                          <h6>Sumber Artikel :<a class="date-entertainment" href="{{ data[i]['url'] }}" target="_blank"> Link </a></h6>
+                                      </div>
+                                    <div class="carousel-wrapper">
+                                      <div class="carousel">
+                                        <a class="carousel-item" href="#one!"><img src="http://placehold.it/300x200"></a>
+                                        <a class="carousel-item" href="#two!"><img src="http://placehold.it/300x200"></a>
+                                        <a class="carousel-item" href="#three!"><img src="http://placehold.it/300x200"></a>
+                                        <a class="carousel-item" href="#four!"><img src="http://placehold.it/300x200"></a>
+                                        <a class="carousel-item" href="#five!"><img src="http://placehold.it/300x200"></a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="gallery-action">
+                                    <a class="btn-floating btn-large waves-effect waves-light pink lighten-1"><i class="material-icons">favorite</i></a>
+                                  </div>
+                                </div>
+                              </div>
+                       {% elif data[i]['category'] == 'tekno' %}
+                           <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter sacred tekno">
+                            <div class="gallery-curve-wrapper">
+                              <a class="gallery-cover gray">
+                                <img class="responsive-img" src="{{ data[i]['img'] }}" alt="placeholder">
+                              </a>
+                              <div class="gallery-header">
+                                  <div class="chip news size-category tekno_category">Technology</div><br><br>
+                                  <span>{{ data[i]['title'] }}</span>
+                              </div>
+                              <div class="gallery-body">
+                                  <div class="title-wrapper"><h5>{{ data[i]['title'] }}</h5></div>
+                                  <div class="chip news size-category tekno_category">Technology</div>
+                                  <div class="chip news size-category tekno_category">
+                                    <a class="link" href="{{ 'https://'+data[i]['source'] }}" target="_blank">{{ data[i]['source'] }}
+                                        <img class="verfied" src="{{ url_for('static', filename='image/check.png') }}">
+                                    </a>
+                                  </div>
+                                  <div class="chip date-tekno">{{ data[i]['publishedAt'] }}</div><br>
+                                  <ul class="tabs tabs-fixed-width tab-demo z-depth-1">
+                                    <li class="tab"><a class="active" href="#{{ data[i]['_id'] }}">Article Content</a></li>
+                                    <li class="tab"><a href="#{{ i }}">NER Article Content</a></li>
+                                  </ul><br>
+                                  <div id="{{ data[i]['_id'] }}" class="col s12 description1">
+                                      <p>
+                                          {% for content in data[i]['content_html'] %}
+                                                {{ content }}<br><br>
+                                          {% endfor %}
+                                      </p>
+                                  </div>
+                                  <div id="{{ i }}" class="col s12">
+                                      <p>
+                                          <div class="row">
+                                            <div class="col s3 left-align">
+                                                <div class="switch batas">
+                                                    <label class="font-label">
+                                                      <input checked type="checkbox" class="checkbox-person{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-person{{ data[i]['_id'] }}', '.PERSON-{{ data[i]['_id'] }}', '#f44336')">
+                                                      <span class="lever"></span>PERSON
+                                                      <div class="chip red accent-2 font-label">{{ data[i]['count_ner']['person'] }}</div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col s3 center-align">
+                                                <div class="switch batas">
+                                                    <label class="font-label">
+                                                      <input checked type="checkbox" class="checkbox-org{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-org{{ data[i]['_id'] }}', '.ORG-{{ data[i]['_id'] }}','#2196f3')">
+                                                      <span class="lever"></span>ORG
+                                                      <div class="chip blue lighten-2 font-label">{{ data[i]['count_ner']['org'] }}</div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col s3 center-align">
+                                                <div class="switch batas">
+                                                    <label class="font-label">
+                                                      <input checked type="checkbox" class="checkbox-gpe{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-gpe{{ data[i]['_id'] }}', '.GPE-{{ data[i]['_id'] }}', '#69f0ae')">
+                                                      <span class="lever"></span>GPE
+                                                      <div class="chip green accent-2 font-label">{{ data[i]['count_ner']['gpe'] }}</div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col s3 right-align">
+                                                <div class="switch batas">
+                                                    <label class="font-label">
+                                                      <input checked type="checkbox" class="checkbox-merk{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-merk{{ data[i]['_id'] }}', '.MERK-{{ data[i]['_id'] }}', '#536dfe')">
+                                                      <span class="lever"></span>MERK
+                                                      <div class="chip indigo accent-2 font-label">{{ data[i]['count_ner']['merk'] }}</div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                              <div class="col s6 center-align">
+                                                  <div class="switch batas">
+                                                    <label class="font-label">
+                                                      <input checked type="checkbox" class="checkbox-event{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-event{{ data[i]['_id'] }}', '.EVENT-{{ data[i]['_id'] }}', '#e040fb')">
+                                                      <span class="lever"></span>EVENT
+                                                      <div class="chip purple accent-2 font-label">{{ data[i]['count_ner']['event'] }}</div>
+                                                    </label>
+                                                  </div>
+                                              </div>
+                                              <div class="col s6 center-align">
+                                                  <div class="switch batas">
+                                                    <label class="font-label">
+                                                      <input checked type="checkbox" class="checkbox-product{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-product{{ data[i]['_id'] }}', '.PRODUCT-{{ data[i]['_id'] }}', '#ff6e40')">
+                                                      <span class="lever"></span>PRODUCT
+                                                      <div class="chip deep-orange accent-2 font-label">{{ data[i]['count_ner']['product'] }}</div>
+                                                    </label>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          {% for content in data[i]['ner_content'] %}
+                                              {{ content|safe }}<br><br>
+                                          {% endfor %}
+                                      </p>
+                                  </div>
+                                  <div class="chip">
+                                      <h6>Sumber Artikel :<a class="date-tekno" href="{{ data[i]['url'] }}" target="_blank"> Link </a></h6>
+                                  </div>
+                                <div class="carousel-wrapper">
+                                  <div class="carousel">
+                                    <a class="carousel-item" href="#one!"><img src="http://placehold.it/300x200"></a>
+                                    <a class="carousel-item" href="#two!"><img src="http://placehold.it/300x200"></a>
+                                    <a class="carousel-item" href="#three!"><img src="http://placehold.it/300x200"></a>
+                                    <a class="carousel-item" href="#four!"><img src="http://placehold.it/300x200"></a>
+                                    <a class="carousel-item" href="#five!"><img src="http://placehold.it/300x200"></a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="gallery-action">
+                                <a class="btn-floating btn-large waves-effect waves-light pink lighten-1"><i class="material-icons">favorite</i></a>
+                              </div>
+                            </div>
+                          </div>
+                       {% elif data[i]['category'] == 'otomotif' %}
+                           <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter sacred otomotif">
+                            <div class="gallery-curve-wrapper">
+                              <a class="gallery-cover gray">
+                                <img class="responsive-img" src="{{ data[i]['img'] }}" alt="placeholder">
+                              </a>
+                              <div class="gallery-header">
+                                  <div class="chip news size-category otomotif_category">Automotive</div><br><br>
+                                  <span>{{ data[i]['title'] }}</span>
+                              </div>
+                              <div class="gallery-body">
+                                  <div class="title-wrapper"><h5>{{ data[i]['title'] }}</h5></div>
+                                  <div class="chip news size-category otomotif_category">Automotive</div>
+                                  <div class="chip news size-category otomotif_category">
+                                    <a class="link" href="{{ 'https://'+data[i]['source'] }}" target="_blank">{{ data[i]['source'] }}
+                                        <img class="verfied" src="{{ url_for('static', filename='image/check.png') }}">
+                                    </a>
+                                  </div>
+                                  <div class="chip date-otomotif">{{ data[i]['publishedAt'] }}</div><br><br>
+                                  <ul class="tabs tabs-fixed-width tab-demo z-depth-1">
+                                    <li class="tab"><a class="active" href="#{{ data[i]['_id'] }}">Article Content</a></li>
+                                    <li class="tab"><a href="#{{ i }}">NER Article Content</a></li>
+                                  </ul>
+                                      <div id="{{ data[i]['_id'] }}" class="col s12 description1">
+                                          <p>
+                                              {% for content in data[i]['content_html'] %}
+                                                    {{ content }}<br><br>
+                                              {% endfor %}
+                                          </p>
+                                      </div>
+                                      <div id="{{ i }}" class="col s12">
+                                          <p>
+                                              <div class="row">
+                                                <div class="col s3 left-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-person{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-person{{ data[i]['_id'] }}', '.PERSON-{{ data[i]['_id'] }}', '#ef9a9a')">
+                                                          <span class="lever"></span>PERSON
+                                                          <div class="chip red lighten-1 font-label">{{ data[i]['count_ner']['person'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s3 center-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-org{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-org{{ data[i]['_id'] }}', '.ORG-{{ data[i]['_id'] }}','#90caf9')">
+                                                          <span class="lever"></span>ORG
+                                                          <div class="chip blue lighten-1 font-label">{{ data[i]['count_ner']['org'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s3 center-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-gpe{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-gpe{{ data[i]['_id'] }}', '.GPE-{{ data[i]['_id'] }}', '#a5d6a7')">
+                                                          <span class="lever"></span>GPE
+                                                          <div class="chip green lighten-3 font-label">{{ data[i]['count_ner']['gpe'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col s3 right-align">
+                                                    <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-merk{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-merk{{ data[i]['_id'] }}', '.MERK-{{ data[i]['_id'] }}', '#9fa8da')">
+                                                          <span class="lever"></span>MERK
+                                                          <div class="chip indigo lighten-3 font-label">{{ data[i]['count_ner']['merk'] }}</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col s6 center-align">
+                                                      <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-event{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-event{{ data[i]['_id'] }}', '.EVENT-{{ data[i]['_id'] }}', '#6a1b9a')">
+                                                          <span class="lever"></span>EVENT
+                                                          <div class="chip purple lighten-3 font-label">{{ data[i]['count_ner']['event'] }}</div>
+                                                        </label>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col s6 center-align">
+                                                      <div class="switch batas">
+                                                        <label class="font-label">
+                                                          <input checked type="checkbox" class="checkbox-product{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-product{{ data[i]['_id'] }}', '.PRODUCT-{{ data[i]['_id'] }}', '#ffab91')">
+                                                          <span class="lever"></span>PRODUCT
+                                                          <div class="chip deep-orange lighten-3 font-label">{{ data[i]['count_ner']['product'] }}</div>
+                                                        </label>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                             {% for content in data[i]['ner_content'] %}
+                                                {{ content|safe }}<br><br>
+                                             {% endfor %}
+                                          </p>
+                                      </div>
+                                  <div class="chip">
+                                      <h6>Sumber Artikel :<a class="date-otomotif" href="{{ data[i]['url'] }}" target="_blank"> Link </a></h6>
+                                  </div>
+                                <div class="carousel-wrapper">
+                                  <div class="carousel">
+                                    <a class="carousel-item" href="#one!"><img src="http://placehold.it/300x200"></a>
+                                    <a class="carousel-item" href="#two!"><img src="http://placehold.it/300x200"></a>
+                                    <a class="carousel-item" href="#three!"><img src="http://placehold.it/300x200"></a>
+                                    <a class="carousel-item" href="#four!"><img src="http://placehold.it/300x200"></a>
+                                    <a class="carousel-item" href="#five!"><img src="http://placehold.it/300x200"></a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="gallery-action">
+                                <a class="btn-floating btn-large waves-effect waves-light pink lighten-1"><i class="material-icons">favorite</i></a>
+                              </div>
+                            </div>
+                          </div>
+                   {% endif %}
+               {% endif %}
+            {% endfor %}
+        </div>
+      </div>
+    </div>
+    <!-- /.container -->
+
+
+    <footer class="page-footer teal">
+      <div class="footer-copyright">
+        <div class="container">
+            <p class="center">© 2018 Copyright Tri Purnomo Aji</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Core Javascript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/materialize/0.98.0/js/materialize.min.js"></script>
+    <script src="{{ url_for('static', filename='js/color-thief.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/galleryExpand.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/init.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/materialize-pagination.js') }}"></script>
+
+    <!-- Resources AmChart 4-->
+    <script src="//www.amcharts.com/lib/4/core.js"></script>
+    <script src="//www.amcharts.com/lib/4/charts.js"></script>
+    <script src="//www.amcharts.com/lib/4/themes/animated.js"></script>
+
+    <script>
+        am4core.useTheme(am4themes_animated);
+        var chart = am4core.create("chartdiv", am4charts.PieChart);
+        chart.data = [
+          {
+            category: "News",
+            value: {{ len_news }}
+          },
+          {
+            category: "Business",
+            value: {{ len_bisnis }}
+          },
+          {
+            category: "Sports",
+            value: {{ len_sports }}
+          },
+          {
+            category: "Entertainment",
+            value: {{ len_entertainment }}
+          },
+          {
+            category: "Technology",
+            value: {{ len_tekno }}
+          },
+          {
+            category: "Automotive",
+            value: {{ len_otomotif }}
+          }
+        ];
+        chart.radius = am4core.percent(70);
+        chart.innerRadius = am4core.percent(40);
+        chart.startAngle = 180;
+        chart.endAngle = 360;
+        var series = chart.series.push(new am4charts.PieSeries());
+        series.dataFields.value = "value";
+        series.dataFields.category = "category";
+        series.slices.template.cornerRadius = 10;
+        series.slices.template.innerCornerRadius = 7;
+        series.slices.template.draggable = true;
+        series.slices.template.inert = true;
+        series.hiddenState.properties.startAngle = 90;
+        series.hiddenState.properties.endAngle = 90;
+        chart.legend = new am4charts.Legend();
+    </script>
+
+    <script>
+        // ===== Scroll to Top ====
+        $(window).scroll(function() {
+            if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
+                $('#return-to-top').fadeIn(200);    // Fade in the arrow
+            } else {
+                $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+            }
+        });
+        $('#return-to-top').click(function() {      // When arrow is clicked
+            $('body,html').animate({
+                scrollTop : 0                       // Scroll to top of body
+            }, 500);
+        });
+    </script>
+    <script>
+        function nerColor(checkboxCont, nerCont, colorNer) {
+            console.log(checkboxCont)
+            console.log(nerCont)
+            console.log(colorNer)
+            if ($(checkboxCont).prop('checked') == false) {
+                $(nerCont).css('cssText', 'border-bottom: transparent !important')
+                {#$(nerCont).children().hide()#}
+            } else {
+                $(nerCont).css('cssText', 'border-bottom: 3px solid'+ colorNer +' !important')
+                {#$(nerCont).children().show()#}
+            }
+        }
+    </script>
+    <script>
+        // Accept datepicker-start or datepicker-end, as we need to initialize both anyway.
+        $("input[class*='datepicker-']").pickadate({
+          selectMonths: true,
+          selectYears: 100,
+          format: 'dd/mmm/yyyy',    // Canadian date format, eh.
+          onSet: function(obj){
+            let thisPicker = $(this)[0].$node;    // Needed to hack to get the thing I was after.
+
+            // Check if this is the start date
+            let classes = thisPicker.attr("class");
+            if (classes === undefined || classes.length === 0 || classes.indexOf("datepicker-start") < 0){
+              return;
+            }
+
+            // .datepicker-start must be wrapped in a div.input-field element (in this example), and
+            // .datepicker-end must be in the next div.input-field.  Change selectors for your conditions.
+            let parent1 = thisPicker.closest("div.input-field");    // This picker's parent
+            let parent2 = parent1.next("div.input-field");          // Next picker's parent
+            let picker2 = parent2.find(".datepicker-end");          // Matching 'end' picker
+
+            // Set end picker minimum date, or whatever you need.
+            if(obj.select){
+              let dt = new Date(obj.select);
+              picker2.pickadate('picker').set('min', dt);
+            }
+
+            if(obj.hasOwnProperty('clear')){
+              picker2.pickadate('picker').set('min', false);
+            }
+          }
+        });
+    </script>
+    <script>
+         $(document).ready(function() {
+            $('select').material_select();
+          });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,141 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/gallery-materialize.min.css') }}"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <style>
+          .font-span {
+              color: black;
+              font-weight: bold;
+          }
+          .font-mark{
+              color : black;
+          }
+          .font-label{
+              color: #7b1fa2;
+              font-weight: bold;
+          }
+      </style>
+    </head>
+
+    <body class="white">
+        <div class="container">
+
+        </div>
+        <div class="row">
+            <div class="col s8">
+                <div class="entities" style="line-height: 2.5">
+                    Nama saya <mark class="person chip indigo lighten-3 font-mark">Aldo <span class="span-person font-span">PERSON</span></mark>
+                    bekerja di <mark class="org chip pink lighten-3 font-mark">Beritagar <span class="span-org font-span">ORG</span></mark>
+                    yang berada di daerah <mark class="gpe chip yellow lighten-3 font-mark">Jakarta <span class="span-gpe font-span">GPE</span></mark>
+                    ini nama <mark class="event chip blue lighten-3 font-mark">Event <span class="span_event font-span">EVENT</span></mark>
+                    ini nama <mark class="merk chip orange lighten-3 font-mark">Merk <span class="span_merk font-span">MERK</span></mark>
+                    ini product <mark class="product chip purple lighten-3 font-mark">Product <span class="span_product font-span">PRODUCT</span></mark>
+                </div><br><br>
+
+                <div class="entities" style="line-height: 2.5">
+                    Nama saya <mark class="person1 font-mark transparent" style="border-bottom: 3px solid #9fa8da">Aldo <span class="span-person font-span">PERSON</span></mark>
+                    bekerja di <mark class="org1 font-mark transparent " style="border-bottom: 3px solid #f48fb1">Beritagar <span class="span-org font-span">ORG</span></mark>
+                    yang berada di daerah <mark class="gpe1 font-mark transparent " style="border-bottom: 3px solid #fff59d">Jakarta <span class="span-gpe font-span">GPE</span></mark>
+                    ini nama <mark class="event1 font-mark transparent " style="border-bottom: 3px solid #ffcc80">Clothing <span class="span_event font-span">EVENT</span></mark>
+                    ini nama <mark class="merk1 font-mark transparent " style="border-bottom: 3px solid #90CAF9">Test <span class="span_merk font-span">MERK</span></mark>
+                    ini product <mark class="product1 font-mark transparent " style="border-bottom: 3px solid #ce93d8">Product <span class="span_product font-span">PRODUCT</span></mark>
+                </div><br><br>
+                <div class="flashes">
+{#                      {% with messages = get_flashed_messages() %}#}
+{#                           {% if messages %}#}
+{#                              {% for message in messages %}#}
+{#                                 {{ message }}#}
+{#                              {% endfor %}#}
+{#                           {% endif %}#}
+{#                      {% endwith %}#}
+                    </div>
+    {#                <div class="entities" style="line-height: 2.5">Kwik <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">Kian Gie<span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">PERSON</span></mark> disebut-sebut bakal masuk dalam tim ekonomi <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">Prabowo<span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">PERSON</span></mark> - <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">Sandiaga Uno<span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">PERSON</span></mark>. Namun Ketua Bidang Perekonomian DPP <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">Partai Demokrasi Indonesia Perjuangan<span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">ORG</span></mark> (<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">PDIP<span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">ORG</span></mark>) <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">Hendrawan Supratikno<span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">PERSON</span></mark> mengatakan dengan memberi arahan bukan berarti Kwik merapat pada salah satu pihak.Hendrawan mengatakan pada Jumat, 19 September 2018, Kwik Kian Gie malah diagendakan berceramah di Markas Cemara, lokasi pemenangan kubu Jokowi - <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">Ma'uf Amin<span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">PERSON</span></mark>.Kwik, kata <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">Hendrawan<span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">PERSON</span></mark>, akan menyampaikan pandangannya seputar ekonomi di depan para anggota tim sukses partai koalisi <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">Jokowi<span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">PERSON</span></mark> -Ma'ruf.Kwik tampak diperebutkan lantaran pandangan-pandangan ekonominya yang dinilai brilian. Hendrawan mengatakan sahabat seperguruannya itu pernah berandil besar pada pembangunan ekonomi. Kwik disebut berhasil membentuk Balitbang PDIP. "Bahkan <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">PDIP<span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">ORG</span></mark> saat itu membuat simulasi-simulasi beberapa undang-undang," katanya.<mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">Hendrawan<span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">PERSON</span></mark> mengatakan Kwik Kian Gie bukan seorang politikus. Menurut <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">Hendrawan<span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">PERSON</span></mark>, Kwik adalah seorang negarawan. Ia juga kader senior <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">PDIP<span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">ORG</span></mark> yang peduli akan persoalan-persoalan bangsa. Langkah Kwik menjadi penasihat ekonomi pun dinilai murni karena ia ingin menularkan pandangan ekonomi terhadap para calon pemimpin."Dia itu negarawan. Jadi, siapa pun yang akan mendengarkan saran dan nasihatnya, dia akan merapat," kata <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">Hendrawan<span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">PERSON</span></mark> kepada <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">Tempo<span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">ORG</span></mark> saat dihubungi pada Selasa, 18 September 2018.Hendrawan meminta masyarakat tak berspekulasi bahwa kegiatan Kwik Kian Gie memberikan siraman ilmu ekonomi bagi salah satu kubu capres dan cawapres dilandasi kepentingan politik. Apalagi bila dikavling-kavling sebagai bagian dari tim sukses. Musababnya, menurut dia, Kwik bukan pribadi yang doyan menghitung untung-rugi kekuasaan.</div>#}
+    {#                <figure style="margin-bottom: 6rem"><div class="entities" style="line-height: 2.5">Asisten virtual <mark class="entity" style="background: #ddd; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">    Amazon    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">MERK</span></mark> Alexa rupanya punya sisi nakal. Sebuah video yang diunggah di laman berbagi memperlihatkan speaker Amazon versi kecil, <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">    Echo Dot    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">PERSON</span></mark>, mengucapkan kata-kata porno.Mengutip laporan <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">    GeekWire    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">ORG</span></mark>, Minggu (1/1/2017), kisah bermula dari seorang anak lelaki yang bermain dengan <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">    Echo Dot    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">PERSON</span></mark> dan meminta agar Alexa memutarkannya sebuah lagu anak-anak melalui speaker tersebut.Alih-alih memutarkan lagu anak yang diminta, Alexa yang tampaknya tak paham dan bertanya apakah si anak ingin mendengarkan hal-hal berbau porno.Menyadari kejadian tersebut, keluarga si anak mulai berteriak, "Tidak!" sebelum Alexa mulai memutarkan beberapa kata porno. Untungnya, sebagian keluarga lain langsung sigap dan meneriakkan perintah agar Alexa berhenti. "Alexa, stop!' ujar anggota keluarga.Laman <mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">    DailyDot    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">ORG</span></mark> mencatat bahwa <mark class="entity" style="background: #aa9cfc; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">    Alexa    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">PERSON</span></mark> berpikir bahwa anak tersebut memintanya memutar sebuah koleksi nada dering komedi berjudul 'Porn Detected' yang beredar tahun 2012.Akibat hal tersebut, salah satu pengguna berkomentar di <mark class="entity" style="background: #ddd; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">    YouTube    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">MERK</span></mark>, menyebutkan bahwa video tersebut sengaja ditempatkan di trending video untuk menyabotase <mark class="entity" style="background: #ddd; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">    Amazon Echo    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">MERK</span></mark>. Tujuannya, kata pengguna tersebut, membuat orang membeli <mark class="entity" style="background: #ddd; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">    Google Home    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">MERK</span></mark>, asisten virtual milik Google.Alexa sebelumnya terus dikembangkan sejak kemunculannya beberapa tahun lalu. Meski begitu, beredarnya video tersebut memperlihatkan bahwa asisten berbasis kecerdasan buatan ini tampak belum sempurna.Padahal, Alexa diklaim memiliki kemampuan memutar lagu, menjawab pertanyaan, mengontrol perangkat rumah, bermain gim dengan pengguna, menyetel alarm, dan masih banyak lagi.Beberapa waktu lalu, Amazon menyebut bahwa musim liburan ini merupakan waktu terbaik untuk membeli perangkat baru, salah satunya speaker Amazon Echo yang dibekali kemampuan asisten virtual Alexa.Amazon sendiri tak memberikan angka spesifik terkait jumlah perangkat Echo yang telah dijualnya. Menurut raksasa e-Commerce <mark class="entity" style="background: #feca74; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em; box-decoration-break: clone; -webkit-box-decoration-break: clone">    Amerika Serikat    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">GPE</span></mark> ini, setidaknya pihaknya telah menjual jutaan perangkat Echo, sembilan kali lipat lebih banyak dibandingkan tahun 2015.</div></figure>#}
+                </div>
+            <div class="col s4">
+                <div class="container">
+                    <div class="ner_css">
+                        <div class="switch batas">
+                            <label class="font-label">
+                              <input checked type="checkbox" class="checkbox-person" onchange="nerColor('.checkbox-person', '.person', '.person1', '#9fa8da')">
+                              <span class="lever"></span>
+                                PERSON
+                              <div class="chip indigo lighten-3">{{ person }}</div>
+                            </label>
+                        </div>
+                        <div class="switch batas">
+                            <label class="font-label">
+                              <input checked type="checkbox" class="checkbox-org" onchange="nerColor('.checkbox-org', '.org', '.org1', '#f48fb1')">
+                              <span class="lever"></span>
+                              ORG
+                              <div class="chip pink lighten-3">{{ org }}</div>
+                            </label>
+                        </div>
+                        <div class="switch batas">
+                            <label class="font-label">
+                              <input checked type="checkbox" class="checkbox-gpe" onchange="nerColor('.checkbox-gpe', '.gpe', '.gpe1', '#fff59d')">
+                              <span class="lever"></span>
+                              GPE
+                              <div class="chip yellow lighten-3">{{ gpe }}</div>
+                            </label>
+                        </div>
+                        <div class="switch batas">
+                            <label class="font-label">
+                              <input checked type="checkbox" class="checkbox-merk" onchange="nerColor('.checkbox-merk', '.merk', '.merk1', '#90CAF9')">
+                              <span class="lever"></span>
+                              MERK
+                              <div class="chip orange lighten-3">{{ merk }}</div>
+                            </label>
+                        </div>
+                        <div class="switch batas">
+                            <label class="font-label">
+                              <input checked type="checkbox" class="checkbox-event" onchange="nerColor('.checkbox-event', '.event', '.event1', '#ffcc80')">
+                              <span class="lever"></span>
+                              EVENT
+                              <div class="chip blue lighten-3">{{ event }}</div>
+                            </label>
+                        </div>
+                        <div class="switch batas">
+                            <label class="font-label">
+                              <input checked type="checkbox" class="checkbox-product" onchange="nerColor('.checkbox-product', '.product', '.product1', '#ce93d8')">
+                              <span class="lever"></span>
+                              PRODUCT
+                              <div class="chip purple lighten-3">{{ product }}</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--JavaScript at end of body for optimized loading-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+{#        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>#}
+        <script type="text/javascript" src="{{ url_for('static', filename='js/materialize.js') }}"></script>
+        <script>
+            function nerColor(checkboxCont, nerCont, nerCont2, colorNer) {
+                if ($(checkboxCont).prop('checked') == false) {
+                    $(nerCont).css('cssText', 'background-color: transparent !important')
+                    $(nerCont).children().hide()
+
+                    $(nerCont2).css('cssText', 'background-color: transparent !important')
+                    $(nerCont2).children().hide()
+                } else {
+                    $(nerCont).css('cssText', 'background-color:'+ colorNer +' !important')
+                    $(nerCont).children().show()
+                    $(nerCont2).css('cssText', 'border-bottom: 3px solid'+ colorNer +' !important')
+                    $(nerCont2).children().show()
+                }
+            }
+        </script>
+    </body>
+  </html>
