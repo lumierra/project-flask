@@ -188,7 +188,7 @@
                                       </ul>
                                       <div id="{{ data[i]['_id'] }}" class="col s12 description1">
                                           <p>
-                                              {% for content in data[i]['content_html'] %}
+                                              {% for content in data[i]['contentHTML'] %}
                                                     {{ content }}<br><br>
                                               {% endfor %}
                                           </p>
@@ -201,7 +201,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-person{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-person{{ data[i]['_id'] }}', '.PERSON-{{ data[i]['_id'] }}', '#ef9a9a')">
                                                           <span class="lever"></span>PERSON
-                                                          <div class="chip red lighten-1 font-label">{{ data[i]['count_ner']['person'] }}</div>
+                                                          <div class="chip red lighten-1 font-label">{{ data[i]['countNer']['person'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -210,7 +210,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-org{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-org{{ data[i]['_id'] }}', '.ORG-{{ data[i]['_id'] }}','#90caf9')">
                                                           <span class="lever"></span>ORG
-                                                          <div class="chip blue lighten-1 font-label">{{ data[i]['count_ner']['org'] }}</div>
+                                                          <div class="chip blue lighten-1 font-label">{{ data[i]['countNer']['org'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -219,7 +219,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-gpe{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-gpe{{ data[i]['_id'] }}', '.GPE-{{ data[i]['_id'] }}', '#a5d6a7')">
                                                           <span class="lever"></span>GPE
-                                                          <div class="chip green lighten-3 font-label">{{ data[i]['count_ner']['gpe'] }}</div>
+                                                          <div class="chip green lighten-3 font-label">{{ data[i]['countNer']['gpe'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -228,7 +228,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-merk{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-merk{{ data[i]['_id'] }}', '.MERK-{{ data[i]['_id'] }}', '#9fa8da')">
                                                           <span class="lever"></span>MERK
-                                                          <div class="chip indigo lighten-3 font-label">{{ data[i]['count_ner']['merk'] }}</div>
+                                                          <div class="chip indigo lighten-3 font-label">{{ data[i]['countNer']['merk'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -239,7 +239,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-event{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-event{{ data[i]['_id'] }}', '.EVENT-{{ data[i]['_id'] }}', '#6a1b9a')">
                                                           <span class="lever"></span>EVENT
-                                                          <div class="chip purple lighten-3 font-label">{{ data[i]['count_ner']['event'] }}</div>
+                                                          <div class="chip purple lighten-3 font-label">{{ data[i]['countNer']['event'] }}</div>
                                                         </label>
                                                       </div>
                                                   </div>
@@ -248,12 +248,12 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-product{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-product{{ data[i]['_id'] }}', '.PRODUCT-{{ data[i]['_id'] }}', '#ffab91')">
                                                           <span class="lever"></span>PRODUCT
-                                                          <div class="chip deep-orange lighten-3 font-label">{{ data[i]['count_ner']['product'] }}</div>
+                                                          <div class="chip deep-orange lighten-3 font-label">{{ data[i]['countNer']['product'] }}</div>
                                                         </label>
                                                       </div>
                                                   </div>
                                               </div>
-                                             {% for content in data[i]['ner_content'] %}
+                                             {% for content in data[i]['nerContent'] %}
                                                 {{ content|safe }}<br><br>
                                              {% endfor %}
                                           </p>
@@ -302,7 +302,7 @@
                                       </ul>
                                       <div id="{{ data[i]['_id'] }}" class="col s12 description1">
                                           <p>
-                                              {% for content in data[i]['content_html'] %}
+                                              {% for content in data[i]['contentHTML'] %}
                                                     {{ content }}<br><br>
                                               {% endfor %}
                                           </p>
@@ -315,7 +315,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-person{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-person{{ data[i]['_id'] }}', '.PERSON-{{ data[i]['_id'] }}', '#ef9a9a')">
                                                           <span class="lever"></span>PERSON
-                                                          <div class="chip red lighten-1 font-label">{{ data[i]['count_ner']['person'] }}</div>
+                                                          <div class="chip red lighten-1 font-label">{{ data[i]['countNer']['person'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -324,7 +324,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-org{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-org{{ data[i]['_id'] }}', '.ORG-{{ data[i]['_id'] }}','#90caf9')">
                                                           <span class="lever"></span>ORG
-                                                          <div class="chip blue lighten-1 font-label">{{ data[i]['count_ner']['org'] }}</div>
+                                                          <div class="chip blue lighten-1 font-label">{{ data[i]['countNer']['org'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -333,7 +333,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-gpe{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-gpe{{ data[i]['_id'] }}', '.GPE-{{ data[i]['_id'] }}', '#a5d6a7')">
                                                           <span class="lever"></span>GPE
-                                                          <div class="chip green lighten-3 font-label">{{ data[i]['count_ner']['gpe'] }}</div>
+                                                          <div class="chip green lighten-3 font-label">{{ data[i]['countNer']['gpe'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -342,7 +342,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-merk{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-merk{{ data[i]['_id'] }}', '.MERK-{{ data[i]['_id'] }}', '#9fa8da')">
                                                           <span class="lever"></span>MERK
-                                                          <div class="chip indigo lighten-3 font-label">{{ data[i]['count_ner']['merk'] }}</div>
+                                                          <div class="chip indigo lighten-3 font-label">{{ data[i]['countNer']['merk'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -353,7 +353,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-event{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-event{{ data[i]['_id'] }}', '.EVENT-{{ data[i]['_id'] }}', '#6a1b9a')">
                                                           <span class="lever"></span>EVENT
-                                                          <div class="chip purple lighten-3 font-label">{{ data[i]['count_ner']['event'] }}</div>
+                                                          <div class="chip purple lighten-3 font-label">{{ data[i]['countNer']['event'] }}</div>
                                                         </label>
                                                       </div>
                                                   </div>
@@ -362,12 +362,12 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-product{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-product{{ data[i]['_id'] }}', '.PRODUCT-{{ data[i]['_id'] }}', '#ffab91')">
                                                           <span class="lever"></span>PRODUCT
-                                                          <div class="chip deep-orange lighten-3 font-label">{{ data[i]['count_ner']['product'] }}</div>
+                                                          <div class="chip deep-orange lighten-3 font-label">{{ data[i]['countNer']['product'] }}</div>
                                                         </label>
                                                       </div>
                                                   </div>
                                               </div>
-                                             {% for content in data[i]['ner_content'] %}
+                                             {% for content in data[i]['nerContent'] %}
                                                 {{ content|safe }}<br><br>
                                              {% endfor %}
                                           </p>
@@ -415,7 +415,7 @@
                                       </ul>
                                       <div id="{{ data[i]['_id'] }}" class="col s12 description1">
                                           <p>
-                                              {% for content in data[i]['content_html'] %}
+                                              {% for content in data[i]['contentHTML'] %}
                                                     {{ content }}<br><br>
                                               {% endfor %}
                                           </p>
@@ -428,7 +428,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-person{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-person{{ data[i]['_id'] }}', '.PERSON-{{ data[i]['_id'] }}', '#ef9a9a')">
                                                           <span class="lever"></span>PERSON
-                                                          <div class="chip red lighten-1 font-label">{{ data[i]['count_ner']['person'] }}</div>
+                                                          <div class="chip red lighten-1 font-label">{{ data[i]['countNer']['person'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -437,7 +437,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-org{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-org{{ data[i]['_id'] }}', '.ORG-{{ data[i]['_id'] }}','#90caf9')">
                                                           <span class="lever"></span>ORG
-                                                          <div class="chip blue lighten-1 font-label">{{ data[i]['count_ner']['org'] }}</div>
+                                                          <div class="chip blue lighten-1 font-label">{{ data[i]['countNer']['org'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -446,7 +446,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-gpe{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-gpe{{ data[i]['_id'] }}', '.GPE-{{ data[i]['_id'] }}', '#a5d6a7')">
                                                           <span class="lever"></span>GPE
-                                                          <div class="chip green lighten-3 font-label">{{ data[i]['count_ner']['gpe'] }}</div>
+                                                          <div class="chip green lighten-3 font-label">{{ data[i]['countNer']['gpe'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -455,7 +455,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-merk{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-merk{{ data[i]['_id'] }}', '.MERK-{{ data[i]['_id'] }}', '#9fa8da')">
                                                           <span class="lever"></span>MERK
-                                                          <div class="chip indigo lighten-3 font-label">{{ data[i]['count_ner']['merk'] }}</div>
+                                                          <div class="chip indigo lighten-3 font-label">{{ data[i]['countNer']['merk'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -466,7 +466,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-event{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-event{{ data[i]['_id'] }}', '.EVENT-{{ data[i]['_id'] }}', '#6a1b9a')">
                                                           <span class="lever"></span>EVENT
-                                                          <div class="chip purple lighten-3 font-label">{{ data[i]['count_ner']['event'] }}</div>
+                                                          <div class="chip purple lighten-3 font-label">{{ data[i]['countNer']['event'] }}</div>
                                                         </label>
                                                       </div>
                                                   </div>
@@ -475,12 +475,12 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-product{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-product{{ data[i]['_id'] }}', '.PRODUCT-{{ data[i]['_id'] }}', '#ffab91')">
                                                           <span class="lever"></span>PRODUCT
-                                                          <div class="chip deep-orange lighten-3 font-label">{{ data[i]['count_ner']['product'] }}</div>
+                                                          <div class="chip deep-orange lighten-3 font-label">{{ data[i]['countNer']['product'] }}</div>
                                                         </label>
                                                       </div>
                                                   </div>
                                               </div>
-                                             {% for content in data[i]['ner_content'] %}
+                                             {% for content in data[i]['nerContent'] %}
                                                 {{ content|safe }}<br><br>
                                              {% endfor %}
                                           </p>
@@ -528,7 +528,7 @@
                                       </ul>
                                       <div id="{{ data[i]['_id'] }}" class="col s12 description1">
                                           <p>
-                                              {% for content in data[i]['content_html'] %}
+                                              {% for content in data[i]['contentHTML'] %}
                                                     {{ content }}<br><br>
                                               {% endfor %}
                                           </p>
@@ -541,7 +541,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-person{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-person{{ data[i]['_id'] }}', '.PERSON-{{ data[i]['_id'] }}', '#ef9a9a')">
                                                           <span class="lever"></span>PERSON
-                                                          <div class="chip red lighten-1 font-label">{{ data[i]['count_ner']['person'] }}</div>
+                                                          <div class="chip red lighten-1 font-label">{{ data[i]['countNer']['person'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -550,7 +550,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-org{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-org{{ data[i]['_id'] }}', '.ORG-{{ data[i]['_id'] }}','#90caf9')">
                                                           <span class="lever"></span>ORG
-                                                          <div class="chip blue lighten-1 font-label">{{ data[i]['count_ner']['org'] }}</div>
+                                                          <div class="chip blue lighten-1 font-label">{{ data[i]['countNer']['org'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -559,7 +559,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-gpe{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-gpe{{ data[i]['_id'] }}', '.GPE-{{ data[i]['_id'] }}', '#a5d6a7')">
                                                           <span class="lever"></span>GPE
-                                                          <div class="chip green lighten-3 font-label">{{ data[i]['count_ner']['gpe'] }}</div>
+                                                          <div class="chip green lighten-3 font-label">{{ data[i]['countNer']['gpe'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -568,7 +568,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-merk{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-merk{{ data[i]['_id'] }}', '.MERK-{{ data[i]['_id'] }}', '#9fa8da')">
                                                           <span class="lever"></span>MERK
-                                                          <div class="chip indigo lighten-3 font-label">{{ data[i]['count_ner']['merk'] }}</div>
+                                                          <div class="chip indigo lighten-3 font-label">{{ data[i]['countNer']['merk'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -579,7 +579,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-event{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-event{{ data[i]['_id'] }}', '.EVENT-{{ data[i]['_id'] }}', '#6a1b9a')">
                                                           <span class="lever"></span>EVENT
-                                                          <div class="chip purple lighten-3 font-label">{{ data[i]['count_ner']['event'] }}</div>
+                                                          <div class="chip purple lighten-3 font-label">{{ data[i]['countNer']['event'] }}</div>
                                                         </label>
                                                       </div>
                                                   </div>
@@ -588,12 +588,12 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-product{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-product{{ data[i]['_id'] }}', '.PRODUCT-{{ data[i]['_id'] }}', '#ffab91')">
                                                           <span class="lever"></span>PRODUCT
-                                                          <div class="chip deep-orange lighten-3 font-label">{{ data[i]['count_ner']['product'] }}</div>
+                                                          <div class="chip deep-orange lighten-3 font-label">{{ data[i]['countNer']['product'] }}</div>
                                                         </label>
                                                       </div>
                                                   </div>
                                               </div>
-                                             {% for content in data[i]['ner_content'] %}
+                                             {% for content in data[i]['nerContent'] %}
                                                 {{ content|safe }}<br><br>
                                              {% endfor %}
                                           </p>
@@ -641,7 +641,7 @@
                                   </ul><br>
                                   <div id="{{ data[i]['_id'] }}" class="col s12 description1">
                                       <p>
-                                          {% for content in data[i]['content_html'] %}
+                                          {% for content in data[i]['contentHTML'] %}
                                                 {{ content }}<br><br>
                                           {% endfor %}
                                       </p>
@@ -654,7 +654,7 @@
                                                     <label class="font-label">
                                                       <input checked type="checkbox" class="checkbox-person{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-person{{ data[i]['_id'] }}', '.PERSON-{{ data[i]['_id'] }}', '#f44336')">
                                                       <span class="lever"></span>PERSON
-                                                      <div class="chip red accent-2 font-label">{{ data[i]['count_ner']['person'] }}</div>
+                                                      <div class="chip red accent-2 font-label">{{ data[i]['countNer']['person'] }}</div>
                                                     </label>
                                                 </div>
                                             </div>
@@ -663,7 +663,7 @@
                                                     <label class="font-label">
                                                       <input checked type="checkbox" class="checkbox-org{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-org{{ data[i]['_id'] }}', '.ORG-{{ data[i]['_id'] }}','#2196f3')">
                                                       <span class="lever"></span>ORG
-                                                      <div class="chip blue lighten-2 font-label">{{ data[i]['count_ner']['org'] }}</div>
+                                                      <div class="chip blue lighten-2 font-label">{{ data[i]['countNer']['org'] }}</div>
                                                     </label>
                                                 </div>
                                             </div>
@@ -672,7 +672,7 @@
                                                     <label class="font-label">
                                                       <input checked type="checkbox" class="checkbox-gpe{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-gpe{{ data[i]['_id'] }}', '.GPE-{{ data[i]['_id'] }}', '#69f0ae')">
                                                       <span class="lever"></span>GPE
-                                                      <div class="chip green accent-2 font-label">{{ data[i]['count_ner']['gpe'] }}</div>
+                                                      <div class="chip green accent-2 font-label">{{ data[i]['countNer']['gpe'] }}</div>
                                                     </label>
                                                 </div>
                                             </div>
@@ -681,7 +681,7 @@
                                                     <label class="font-label">
                                                       <input checked type="checkbox" class="checkbox-merk{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-merk{{ data[i]['_id'] }}', '.MERK-{{ data[i]['_id'] }}', '#536dfe')">
                                                       <span class="lever"></span>MERK
-                                                      <div class="chip indigo accent-2 font-label">{{ data[i]['count_ner']['merk'] }}</div>
+                                                      <div class="chip indigo accent-2 font-label">{{ data[i]['countNer']['merk'] }}</div>
                                                     </label>
                                                 </div>
                                             </div>
@@ -692,7 +692,7 @@
                                                     <label class="font-label">
                                                       <input checked type="checkbox" class="checkbox-event{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-event{{ data[i]['_id'] }}', '.EVENT-{{ data[i]['_id'] }}', '#e040fb')">
                                                       <span class="lever"></span>EVENT
-                                                      <div class="chip purple accent-2 font-label">{{ data[i]['count_ner']['event'] }}</div>
+                                                      <div class="chip purple accent-2 font-label">{{ data[i]['countNer']['event'] }}</div>
                                                     </label>
                                                   </div>
                                               </div>
@@ -701,12 +701,12 @@
                                                     <label class="font-label">
                                                       <input checked type="checkbox" class="checkbox-product{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-product{{ data[i]['_id'] }}', '.PRODUCT-{{ data[i]['_id'] }}', '#ff6e40')">
                                                       <span class="lever"></span>PRODUCT
-                                                      <div class="chip deep-orange accent-2 font-label">{{ data[i]['count_ner']['product'] }}</div>
+                                                      <div class="chip deep-orange accent-2 font-label">{{ data[i]['countNer']['product'] }}</div>
                                                     </label>
                                                   </div>
                                               </div>
                                           </div>
-                                          {% for content in data[i]['ner_content'] %}
+                                          {% for content in data[i]['nerContent'] %}
                                               {{ content|safe }}<br><br>
                                           {% endfor %}
                                       </p>
@@ -754,7 +754,7 @@
                                   </ul>
                                       <div id="{{ data[i]['_id'] }}" class="col s12 description1">
                                           <p>
-                                              {% for content in data[i]['content_html'] %}
+                                              {% for content in data[i]['contentHTML'] %}
                                                     {{ content }}<br><br>
                                               {% endfor %}
                                           </p>
@@ -767,7 +767,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-person{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-person{{ data[i]['_id'] }}', '.PERSON-{{ data[i]['_id'] }}', '#ef9a9a')">
                                                           <span class="lever"></span>PERSON
-                                                          <div class="chip red lighten-1 font-label">{{ data[i]['count_ner']['person'] }}</div>
+                                                          <div class="chip red lighten-1 font-label">{{ data[i]['countNer']['person'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -776,7 +776,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-org{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-org{{ data[i]['_id'] }}', '.ORG-{{ data[i]['_id'] }}','#90caf9')">
                                                           <span class="lever"></span>ORG
-                                                          <div class="chip blue lighten-1 font-label">{{ data[i]['count_ner']['org'] }}</div>
+                                                          <div class="chip blue lighten-1 font-label">{{ data[i]['countNer']['org'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -785,7 +785,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-gpe{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-gpe{{ data[i]['_id'] }}', '.GPE-{{ data[i]['_id'] }}', '#a5d6a7')">
                                                           <span class="lever"></span>GPE
-                                                          <div class="chip green lighten-3 font-label">{{ data[i]['count_ner']['gpe'] }}</div>
+                                                          <div class="chip green lighten-3 font-label">{{ data[i]['countNer']['gpe'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -794,7 +794,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-merk{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-merk{{ data[i]['_id'] }}', '.MERK-{{ data[i]['_id'] }}', '#9fa8da')">
                                                           <span class="lever"></span>MERK
-                                                          <div class="chip indigo lighten-3 font-label">{{ data[i]['count_ner']['merk'] }}</div>
+                                                          <div class="chip indigo lighten-3 font-label">{{ data[i]['countNer']['merk'] }}</div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -805,7 +805,7 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-event{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-event{{ data[i]['_id'] }}', '.EVENT-{{ data[i]['_id'] }}', '#6a1b9a')">
                                                           <span class="lever"></span>EVENT
-                                                          <div class="chip purple lighten-3 font-label">{{ data[i]['count_ner']['event'] }}</div>
+                                                          <div class="chip purple lighten-3 font-label">{{ data[i]['countNer']['event'] }}</div>
                                                         </label>
                                                       </div>
                                                   </div>
@@ -814,12 +814,12 @@
                                                         <label class="font-label">
                                                           <input checked type="checkbox" class="checkbox-product{{ data[i]['_id'] }}" onchange="nerColor('.checkbox-product{{ data[i]['_id'] }}', '.PRODUCT-{{ data[i]['_id'] }}', '#ffab91')">
                                                           <span class="lever"></span>PRODUCT
-                                                          <div class="chip deep-orange lighten-3 font-label">{{ data[i]['count_ner']['product'] }}</div>
+                                                          <div class="chip deep-orange lighten-3 font-label">{{ data[i]['countNer']['product'] }}</div>
                                                         </label>
                                                       </div>
                                                   </div>
                                               </div>
-                                             {% for content in data[i]['ner_content'] %}
+                                             {% for content in data[i]['nerContent'] %}
                                                 {{ content|safe }}<br><br>
                                              {% endfor %}
                                           </p>

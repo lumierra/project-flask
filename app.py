@@ -13,7 +13,7 @@ import json
 app = Flask(__name__)
 app.config.update(dict(SECRET_KEY='yoursecretkey'))
 client = MongoClient("mongodb://localhost:27017")
-db = client.scraper
+db = client.iStorage
 
 #datetime Now
 now = datetime.datetime.now()
@@ -99,7 +99,8 @@ dbMongo = Database()
 @app.route('/')
 def main():
 
-    query = db.test.find({"publishedAt" : "0{}-{}-{}".format(day, month, year)})
+    # query = db.test.find({"publishedAt" : "{}-0{}-{}".format(day, month, year)})
+    query = db.iData.find({"publishedAt" : "20-04-2019"})
 
     data_now = []
     for q in query:
@@ -232,6 +233,59 @@ def findata():
                            len_sports=len_sports, len_tekno=len_tekno, len_otomotif=len_otomotif,
                            len_liputan=len_liputan, len_kompas=len_kompas, len_tempo=len_tempo,
                            start_date=start_date_name, end_date=end_date_name)
+
+@app.route('/admin')
+def admin():
+
+    # query = db.test.find({"publishedAt" : "{}-0{}-{}".format(day, month, year)})
+    query = db.iData.find({})
+
+    data_now = []
+    for q in query:
+        data_now.append(q)
+
+    news, bisnis, entertainment, sports, tekno, otomotif = [],[],[],[],[],[]
+    for d in data_now:
+        if d['category'] == 'news':
+            news.append(d)
+        elif d['category'] == 'bisnis':
+            bisnis.append(d)
+        elif d['category'] == 'entertainment':
+            entertainment.append(d)
+        elif d['category'] == 'sports':
+            sports.append(d)
+        elif d['category'] == 'tekno':
+            tekno.append(d)
+        elif d['category'] == 'otomotif':
+            otomotif.append(d)
+
+    len_liputan, len_kompas, len_tempo = [],[], []
+    for d in data_now:
+        if d['source'] == 'liputan6.com':
+            len_liputan.append(d)
+        elif d['source'] == 'kompas.com':
+            len_kompas.append(d)
+        elif d['source'] == 'tempo.co':
+            len_tempo.append(d)
+
+    len_news = len(news)
+    len_bisnis = len(bisnis)
+    len_entertainment = len(entertainment)
+    len_sports = len(sports)
+    len_tekno = len(tekno)
+    len_otomotif = len(otomotif)
+    len_data = len(data_now)
+    len_liputan = len(len_liputan)
+    len_kompas = len(len_kompas)
+    len_tempo = len(len_tempo)
+
+    shuffle(data_now)
+
+    return render_template('admin.html', data=data_now, len_data=len_data, len_news=len_news,
+                           len_bisnis=len_bisnis, len_entertainment=len_entertainment,
+                           len_sports=len_sports, len_tekno=len_tekno, len_otomotif=len_otomotif,
+                           len_liputan=len_liputan, len_kompas=len_kompas, len_tempo=len_tempo)
+
 
 @app.route('/test', methods=['POST', 'GET'])
 def test():
