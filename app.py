@@ -280,7 +280,7 @@ def admin():
     len_tempo = len(len_tempo)
 
     shuffle(data_now)
-
+    test = 'test'
     return render_template('admin.html', data=data_now, len_data=len_data, len_news=len_news,
                            len_bisnis=len_bisnis, len_entertainment=len_entertainment,
                            len_sports=len_sports, len_tekno=len_tekno, len_otomotif=len_otomotif,
