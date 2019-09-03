@@ -13,7 +13,8 @@ import json
 app = Flask(__name__)
 app.config.update(dict(SECRET_KEY='yoursecretkey'))
 client = MongoClient("mongodb://localhost:27017")
-db = client.iStorage
+db = client.iData
+dbAdmin = client.iStorage
 
 #datetime Now
 now = datetime.datetime.now()
@@ -100,11 +101,20 @@ dbMongo = Database()
 def main():
 
     # query = db.test.find({"publishedAt" : "{}-0{}-{}".format(day, month, year)})
-    query = db.iData.find({"publishedAt" : "20-04-2019"})
+    query = db.test.find({"publishedAt" : "02-09-2019"})
 
     data_now = []
     for q in query:
         data_now.append(q)
+
+    # query top entity
+    queryTE = db.topEntity.find({"publishedAt" : "2-9-2019"})
+    temp, topEntity = [], []
+    for qe in queryTE:
+        temp.append(qe)
+    for i in range(len(temp)):
+        for t in temp[i]['top_ner']:
+            topEntity.append(t[0])
 
     news, bisnis, entertainment, sports, tekno, otomotif = [],[],[],[],[],[]
     for d in data_now:
@@ -143,7 +153,7 @@ def main():
 
     shuffle(data_now)
 
-    return render_template('full-header.html', data=data_now, len_data=len_data, len_news=len_news,
+    return render_template('full-header.html',topEntity=topEntity, data=data_now, len_data=len_data, len_news=len_news,
                            len_bisnis=len_bisnis, len_entertainment=len_entertainment,
                            len_sports=len_sports, len_tekno=len_tekno, len_otomotif=len_otomotif,
                            len_liputan=len_liputan, len_kompas=len_kompas, len_tempo=len_tempo)
@@ -238,13 +248,13 @@ def findata():
 def admin():
 
     # query = db.test.find({"publishedAt" : "{}-0{}-{}".format(day, month, year)})
-    query = db.iData.find({})
+    query = dbAdmin.iData.find({})
 
     data_now = []
     for q in query:
         data_now.append(q)
 
-    news, bisnis, entertainment, sports, tekno, otomotif = [],[],[],[],[],[]
+    news, bisnis, entertainment, sports, tekno, otomotif, health = [],[],[],[],[],[],[]
     for d in data_now:
         if d['category'] == 'news':
             news.append(d)
@@ -258,6 +268,8 @@ def admin():
             tekno.append(d)
         elif d['category'] == 'otomotif':
             otomotif.append(d)
+        elif d['category'] == 'health':
+            health.append(d)
 
     len_liputan, len_kompas, len_tempo = [],[], []
     for d in data_now:
@@ -274,16 +286,17 @@ def admin():
     len_sports = len(sports)
     len_tekno = len(tekno)
     len_otomotif = len(otomotif)
+    len_health = len(health)
     len_data = len(data_now)
     len_liputan = len(len_liputan)
     len_kompas = len(len_kompas)
     len_tempo = len(len_tempo)
 
     shuffle(data_now)
-    test = 'test'
+
     return render_template('admin.html', data=data_now, len_data=len_data, len_news=len_news,
                            len_bisnis=len_bisnis, len_entertainment=len_entertainment,
-                           len_sports=len_sports, len_tekno=len_tekno, len_otomotif=len_otomotif,
+                           len_sports=len_sports, len_tekno=len_tekno, len_otomotif=len_otomotif, len_health=len_health,
                            len_liputan=len_liputan, len_kompas=len_kompas, len_tempo=len_tempo)
 
 
@@ -295,18 +308,30 @@ def test():
     # for q in query:
     #     data_now.append(q)
 
-    if request.method == 'POST':
-        nama = request.form['keyword']
-        start_date = request.form['start_date']
-        start_date = datetime.datetime.strptime(start_date, "%d/%b/%Y").strftime("%d-%m-%Y")
-        end_date = request.form['end_date']
-        end_date = datetime.datetime.strptime(end_date, "%d/%b/%Y").strftime("%d-%m-%Y")
-        kategori = request.form.get('select_kategori')
+    # if request.method == 'POST':
+    #     nama = request.form['keyword']
+    #     start_date = request.form['start_date']
+    #     start_date = datetime.datetime.strptime(start_date, "%d/%b/%Y").strftime("%d-%m-%Y")
+    #     end_date = request.form['end_date']
+    #     end_date = datetime.datetime.strptime(end_date, "%d/%b/%Y").strftime("%d-%m-%Y")
+    #     kategori = request.form.get('select_kategori')
 
-    else:
-        return "error"
+    # else:
+    #     return "error"
+    kategori = 'test'
 
-    return render_template('test.html', kategori=kategori)
+    # query top entity
+    query = db.topEntity.find({"publishedAt" : "2-9-2019"})
+    temp, topEntity = [], []
+    for qe in query:
+        temp.append(qe)
+    for i in range(len(temp)):
+        for t in temp[i]['top_ner']:
+            topEntity.append(t[0])
+
+    asd = len(topEntity)
+
+    return render_template('test.html', kategori=kategori, topEntity=topEntity, asd=asd)
 
 if __name__ == '__main__':
     app.run(debug=True)
