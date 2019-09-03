@@ -35,9 +35,9 @@
         </div>
       </div>
       <div class='container'>
-          <!-- <div class='nav-header valign-wrapper'> -->
-              <!-- <div id='chartdiv'></div> -->
-          <!-- </div> -->
+          <div class='nav-header valign-wrapper'>
+              <div id='chartdiv'></div>
+          </div>
       </div>
       <!-- <div class="nav-header valign-wrapper">
           <div id="chartdiv" class="small-chart"></div><br>
@@ -60,8 +60,8 @@
       <div class="categories-wrapper teal lighten-2">
         <div class="categories-container">
             <ul class="categories container">
-                <li class="active"><a href="#all" class="font-categories">Semua <span class="new badge teal">{% print(len_data) %}</span></a></li>
-                <li><a href="#news" class="font-categories">POLHUKAMPER <span class="new badge teal">{% print(len_news) %}</span></a></li>
+                <li class="active"><a href="#all" class="font-categories">SEMUA <span class="new badge teal">{% print(len_data) %}</span></a></li>
+                <li><a href="#news" class="font-categories">POLHUKAM <span class="new badge teal">{% print(len_news) %}</span></a></li>
                 <li><a href="#bisnis" class="font-categories">BISNIS <span class="new badge teal">{% print(len_bisnis) %}</span></a></li>
                 <li><a href="#sports" class="font-categories">OLAHRAGA <span class="new badge teal">{% print(len_sports) %}</span></a></li>
                 <li><a href="#entertainment" class="font-categories">HIBURAN <span class="new badge teal">{% print(len_entertainment) %}</span></a></li>
@@ -71,21 +71,23 @@
             </ul>
         </div>
       </div>
-      <!-- Top Entity -->
-      <div class="container">
-        {% for te in topEntity[:10] %}
-          <div class="chip teal">
+    </nav>
+
+    <ul class="side-nav" id="nav-mobile">
+      <li><a href="/"><i class="material-icons">camera</i>Gallery News</a></li>
+    </ul>
+
+    <!-- Top Entity -->
+    <div class="container">
+      <div class="teal lighten-4" style="height: 100px; border-radius: 0px 0px 20px 20px; text-align: justify;">
+        {% for te in topEntity[:15] %}
+          <div class="chip teal" style="margin:10px; font-size:15px; color:white; text-align: justify">
               {{ te }}
           </div>
         {% endfor %}
       </div>
-    </nav>
-    <ul class="side-nav" id="nav-mobile">
-      <li><a href="/"><i class="material-icons">camera</i>Gallery News</a></li>
-    </ul>
-    <br><br>
-    
-    
+    </div>
+    <br><br>    
 
     <!-- Gallery -->
     <div id="portfolio" class="section gray">
@@ -887,12 +889,14 @@
       // Themes end
       
       var data = {
-        "General": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 },
-        "Business": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 },
-        "Entertainment": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 },
-        "Sports": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 },
-        "Technology": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 },
-        "Automotive": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 }
+        "Polhukam": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 },
+        "Bisnis": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 },
+        "Hiburan": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 },
+        "Olahraga": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 },
+        "Teknologi": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 },
+        "Otomotif": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 },
+        "Kesehatan": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 }
+      
       }
       
       function processData(data) {
@@ -973,7 +977,29 @@
       image.adapter.add("href", function (href, target) {
         var dataItem = target.parent.dataItem;
         if (dataItem) {
-          return "https://www.amcharts.com/lib/images/logos/" + dataItem.treeMapDataItem.name.toLowerCase() + ".png";
+          // return "https://www.amcharts.com/lib/images/logos/" + dataItem.treeMapDataItem.name.toLowerCase() + ".png";
+          // return "https://i.ibb.co/YyrWd3L/polhukam.png";
+          if (dataItem.treeMapDataItem.name.toLowerCase() == "polhukam") {
+            return "https://i.ibb.co/YyrWd3L/polhukam.png";
+          }
+          else if (dataItem.treeMapDataItem.name.toLowerCase() == "bisnis"){
+            return "https://i.ibb.co/7Rhzkg0/bisnis.png";
+          }
+          else if (dataItem.treeMapDataItem.name.toLowerCase() == "hiburan"){
+            return "https://i.ibb.co/YQFrBZS/hiburan.png";
+          }
+          else if (dataItem.treeMapDataItem.name.toLowerCase() == "olahraga"){
+            return "https://i.ibb.co/1MtMqkf/olahraga.png";
+          }
+          else if (dataItem.treeMapDataItem.name.toLowerCase() == "teknologi"){
+            return "https://i.ibb.co/zsXZ2fX/teknologi.png";
+          }
+          else if (dataItem.treeMapDataItem.name.toLowerCase() == "otomotif"){
+            return "https://i.ibb.co/SV7Pj0t/otomotif.png";
+          }
+          else if (dataItem.treeMapDataItem.name.toLowerCase() == "kesehatan"){
+            return "https://i.ibb.co/4W5vLcC/kesehatan.png";
+          }
         }
       });
       
