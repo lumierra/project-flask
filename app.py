@@ -116,7 +116,7 @@ def main():
         for t in temp[i]['top_ner']:
             topEntity.append(t[0])
 
-    news, bisnis, entertainment, sports, tekno, otomotif = [],[],[],[],[],[]
+    news, bisnis, entertainment, sports, tekno, otomotif, health = [],[],[],[],[],[],[]
     for d in data_now:
         if d['category'] == 'news':
             news.append(d)
@@ -130,6 +130,8 @@ def main():
             tekno.append(d)
         elif d['category'] == 'otomotif':
             otomotif.append(d)
+        elif d['category'] == 'health':
+            health.append(d)
 
     len_liputan, len_kompas, len_tempo = [],[], []
     for d in data_now:
@@ -146,6 +148,7 @@ def main():
     len_sports = len(sports)
     len_tekno = len(tekno)
     len_otomotif = len(otomotif)
+    len_health = len(health)
     len_data = len(data_now)
     len_liputan = len(len_liputan)
     len_kompas = len(len_kompas)
@@ -155,7 +158,7 @@ def main():
 
     return render_template('full-header.html',topEntity=topEntity, data=data_now, len_data=len_data, len_news=len_news,
                            len_bisnis=len_bisnis, len_entertainment=len_entertainment,
-                           len_sports=len_sports, len_tekno=len_tekno, len_otomotif=len_otomotif,
+                           len_sports=len_sports, len_tekno=len_tekno, len_otomotif=len_otomotif, len_health=len_health,
                            len_liputan=len_liputan, len_kompas=len_kompas, len_tempo=len_tempo)
 
 @app.route('/data')

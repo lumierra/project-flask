@@ -17,11 +17,48 @@
 
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <style>
+      .batas{
+        height: 100px;
+      }
+      .kanan{
+        height: 400px;
+        /* border: 1px solid #000; */
+      }
+      .kiri{
+        height: 420px;
+        border-radius: 10px;
+        /* border: 1px solid #000; */
+      }
+      .anak-kanan{
+        height: 200px;
+        text-align: center;
+        border-radius: 10px;
+        /* border: 1px solid #000; */
+      }
+      .child-categories{
+        text-align: center;
+        margin-top: 50px;
+      }
+      .top-categories{
+        text-align: center;
+        margin-top: 100px;
+      }
+      .top-categories:hover{
+        color: #000;
+      }
+      .child-categories:hover{
+        color:#000;
+      }
+      .line-categories{
+        margin-left: 50px;
+      }
+    </style>
   </head>
 
   <body>
     <a href="javascript:" id="return-to-top"><i class="large material-icons">arrow_drop_up</i></a>
+    
     <!-- Navbar and Header -->
     <nav class="nav-extended nav-full-header teal lighten-5">
       <div class="nav-wrapper teal">
@@ -34,10 +71,68 @@
             </ul>
         </div>
       </div>
+      <div class="batas"></div>
       <div class='container'>
-          <div class='nav-header valign-wrapper'>
-              <div id='chartdiv'></div>
+        <div class="row">
+          <div class="col s8 push-s4 kanan">
+            <div class="row">
+              <div class="col s4 anak-kanan  blue lighten-2">
+                <div class="child-categories">
+                  <h5>BISNIS</h5>
+                  <h5>{{ len_bisnis }}</h5>
+                  <h5>Artikel</h5>
+                </div>
+              </div>
+              <div class="col s4 anak-kanan" style="background-color: #3D003D">
+                <div class="child-categories">
+                  <h5>OLAHRAGA</h5>
+                  <h5>{{ len_sports }}</h5>
+                  <h5>Artikel</h5>
+                </div>
+              </div>
+              <div class="col s4 anak-kanan pink lighten-2">
+                <div class="child-categories">
+                  <h5>HIBURAN</h5>
+                  <h5>{{ len_entertainment }}</h5>
+                  <h5>Artikel</h5>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s4 anak-kanan" style="background-color:#1F338E;">
+                <div class="child-categories">
+                  <h5>TEKNOLOGI</h5>
+                  <h5>{{ len_tekno }}</h5>
+                  <h5>Artikel</h5>
+                </div>
+              </div>
+              <div class="col s4 anak-kanan grey darken-1">
+                <div class="child-categories">
+                  <h5>OTOMOTIF</h5>
+                  <h5>{{ len_otomotif }}</h5>
+                  <h5>Artikel</h5>
+                </div>
+              </div>
+              <div class="col s4 anak-kanan purple lighten-3">
+                <div class="child-categories">
+                  <h5>KESEHATAN</h5>
+                  <h5>{{ len_health }}</h5>
+                  <h5>Artikel</h5>
+                </div>
+              </div>
+            </div>
           </div>
+          <div class="col s4 pull-s8 kiri red lighten-1">
+            <div class="top-categories">
+              <h3>POLHUKAM</h3>
+              <h3>{{ len_news }}</h3>
+              <h3>Artikel</h3>
+            </div>
+          </div>
+        </div>
+          <!-- <div class='nav-header valign-wrapper'>
+              <div id='chartdiv'></div>
+          </div> -->
       </div>
       <!-- <div class="nav-header valign-wrapper">
           <div id="chartdiv" class="small-chart"></div><br>
@@ -59,7 +154,7 @@
       <!-- Fixed Masonry Filters -->
       <div class="categories-wrapper teal lighten-2">
         <div class="categories-container">
-            <ul class="categories container">
+            <ul class="categories line-categories">
                 <li class="active"><a href="#all" class="font-categories">SEMUA <span class="new badge teal">{% print(len_data) %}</span></a></li>
                 <li><a href="#news" class="font-categories">POLHUKAM <span class="new badge teal">{% print(len_news) %}</span></a></li>
                 <li><a href="#bisnis" class="font-categories">BISNIS <span class="new badge teal">{% print(len_bisnis) %}</span></a></li>
@@ -67,7 +162,7 @@
                 <li><a href="#entertainment" class="font-categories">HIBURAN <span class="new badge teal">{% print(len_entertainment) %}</span></a></li>
                 <li><a href="#tekno" class="font-categories">TEKNOLOGI <span class="new badge teal">{% print(len_tekno) %}</span></a></li>
                 <li><a href="#otomotif" class="font-categories">OTOMOTIF <span class="new badge teal">{% print(len_otomotif) %}</span></a></li>
-                <li><a href="#health" class="font-categories">KESEHATAN <span class="new badge teal">{% print(len_otomotif) %}</span></a></li>
+                <li><a href="#health" class="font-categories">KESEHATAN <span class="new badge teal">{% print(len_health) %}</span></a></li>
             </ul>
         </div>
       </div>
@@ -889,13 +984,14 @@
       // Themes end
       
       var data = {
-        "Polhukam": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 },
-        "Bisnis": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 },
-        "Hiburan": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 },
-        "Olahraga": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 },
-        "Teknologi": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 },
-        "Otomotif": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 },
-        "Kesehatan": { "C-Max": 18390, "Edge": 142603, "Escape": 308296, "E-Series": 53304, "Expedition": 51883, "Explorer": 271131, "Fiesta": 46249, "Flex": 22389, "Focus": 158385, "F-Series": 896764, "Fusion": 209623, "GT": 89, "Mustang": 81866, "Taurus": 41236, "Transit": 127360, "Transit Connect": 34473 }
+        "Polhukam": { "Cherokee": 169882, "Compass": 83253, "Grand Cherokee": 240696, "Patriot": 10735, "Renegade": 103434, "Wrangler": 190522 },
+        "Bisnis": { "Cherokee": 169882, "Compass": 83253, "Grand Cherokee": 240696, "Patriot": 10735, "Renegade": 103434, "Wrangler": 190522 },
+        "Hiburan": { "Cherokee": 169882, "Compass": 83253, "Grand Cherokee": 240696, "Patriot": 10735, "Renegade": 103434, "Wrangler": 190522 },
+        "Olahraga": { "Cherokee": 169882, "Compass": 83253, "Grand Cherokee": 240696, "Patriot": 10735, "Renegade": 103434, "Wrangler": 190522 },
+        "Teknologi": { "Cherokee": 169882, "Compass": 83253, "Grand Cherokee": 240696, "Patriot": 10735, "Renegade": 103434, "Wrangler": 190522 },
+        "Otomotif": { "Cherokee": 169882, "Compass": 83253, "Grand Cherokee": 240696, "Patriot": 10735, "Renegade": 103434, "Wrangler": 190522 },
+        "Kesehatan": { "Cherokee": 169882, "Compass": 83253, "Grand Cherokee": 240696, "Patriot": 10735, "Renegade": 103434, "Wrangler": 190522 },
+        // "Test": { "C-Max": 183900 }
       
       }
       
@@ -919,7 +1015,7 @@
           }
       
           // add to small brands if total number less than
-          if (brandTotal > 100000) {
+          if (brandTotal > 100000 ) {
             treeData.push(brandData);
           }
           else {
@@ -977,8 +1073,6 @@
       image.adapter.add("href", function (href, target) {
         var dataItem = target.parent.dataItem;
         if (dataItem) {
-          // return "https://www.amcharts.com/lib/images/logos/" + dataItem.treeMapDataItem.name.toLowerCase() + ".png";
-          // return "https://i.ibb.co/YyrWd3L/polhukam.png";
           if (dataItem.treeMapDataItem.name.toLowerCase() == "polhukam") {
             return "https://i.ibb.co/YyrWd3L/polhukam.png";
           }
